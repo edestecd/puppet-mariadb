@@ -28,7 +28,7 @@ class mariadb::repo::apt {
       },
     }
     # lint:ignore:spaceship_operator_without_tag
-    Apt::Source['percona'] -> Class['apt::update'] -> Package<| |>
+    Apt::Source['percona-release'] -> Class['apt::update'] -> Package<| |>
     # lint:endignore
   }
 }

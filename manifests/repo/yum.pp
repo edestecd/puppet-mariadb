@@ -27,7 +27,7 @@ class mariadb::repo::yum {
       gpgkey   => 'https://www.percona.com/downloads/RPM-GPG-KEY-percona',
     }
     # lint:ignore:spaceship_operator_without_tag
-    Yumrepo['percona'] -> Package<| |>
+    Yumrepo['percona-release'] -> Package<| |>
     # lint:endignore
   }
 }
