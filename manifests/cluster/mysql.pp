@@ -33,7 +33,7 @@ class mariadb::cluster::mysql {
   class { '::mysql::server':
     config_file             => $mariadb::cluster::config_file,
     includedir              => $mariadb::cluster::includedir,
-    override_options        => mysql_deepmerge($auth_pam_options, $mariadb::cluster::options),
+    override_options        => mysql_deepmerge($auth_pam_options, $mariadb::cluster::cluster_options),
     package_ensure          => installed,
     package_name            => $_cluster_package_name,
     remove_default_accounts => true,

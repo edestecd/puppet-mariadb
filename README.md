@@ -77,14 +77,19 @@ class { 'mariadb::server':
 
 ```puppet
 class { 'mariadb::cluster':
-  wsrep_cluster_peers => delete(['192.168.1.1', '192.168.1.2', '192.168.1.3'], $::ipaddress),
-  wsrep_cluster_name  => 'my_super_cluster',
-  wsrep_sst_password  => 'super_secret_password',
-  root_password       => 'another_secret_password',
-  override_options    => {
+  wsrep_cluster_peers     => delete(['192.168.1.1', '192.168.1.2', '192.168.1.3'], $::ipaddress),
+  wsrep_cluster_name      => 'my_super_cluster',
+  wsrep_sst_password      => 'super_secret_password',
+  wsrep_sst_method        => 'xtrabackup-v2',
+  root_password           => 'another_secret_password',
+  override_options        => {
     'performance_schema'    => undef,
     'innodb_file_per_table' => 'OFF',
   },
+  galera_override_options => {
+    'wsrep_slave_threads'            => '2',
+    'innodb_flush_log_at_trx_commit' => '0',
+  }
 }
 ```
 
@@ -101,11 +106,15 @@ mariadb::cluster::wsrep_cluster_peers:
 - 192.168.1.1
 - 192.168.1.2
 mariadb::cluster::wsrep_cluster_name: my_super_cluster
-mariadb::cluster::wsrep_sst_password: super_secret_password
+mariadb::cluster::wsrep_sst_method: rsync
 mariadb::cluster::root_password: another_secret_password
 
 mariadb::cluster::override_options:
+  performance_schema: OFF
   innodb_file_per_table: OFF
+mariadb::cluster::galera_override_options:
+  wsrep_slave_threads: 2
+  innodb_flush_log_at_trx_commit: 0
 ```
 
 ##Reference

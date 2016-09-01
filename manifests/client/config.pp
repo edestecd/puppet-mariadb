@@ -22,7 +22,7 @@ class mariadb::client::config {
   $options = $mariadb::client::options
   $includedir = false
 
-  file { "${mariadb::client::config_dir}/clients.cnf":
+  file { "${mariadb::client::config_dir}/client.cnf":
     ensure  => file,
     owner   => 'root',
     group   => $mysql::params::root_group,

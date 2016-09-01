@@ -58,18 +58,15 @@ class mariadb::cluster (
   $config_file                 = $mariadb::params::config_file,
   $includedir                  = $mariadb::params::includedir,
   $config_dir                  = $mariadb::params::config_dir,
-  $wsrep_provider              = $mariadb::params::wsrep_provider,
   $wsrep_cluster_address       = $mariadb::params::wsrep_cluster_address,
   $wsrep_cluster_peers         = $mariadb::params::wsrep_cluster_peers,
   $wsrep_cluster_name          = $mariadb::params::wsrep_cluster_name,
   $wsrep_sst_user              = $mariadb::params::wsrep_sst_user,
   $wsrep_sst_password          = $mariadb::params::wsrep_sst_password,
   $wsrep_sst_method            = $mariadb::params::wsrep_sst_method,
-  $wsrep_slave_threads         = $mariadb::params::wsrep_slave_threads,
-  $wsrep_node_address          = $mariadb::params::wsrep_node_address,
-  $wsrep_node_incoming_address = $mariadb::params::wsrep_node_incoming_address,
   $root_password               = $mariadb::params::root_password,
   $override_options            = {},
+  $galera_override_options     = {},
 
   $auth_pam                    = $mariadb::params::auth_pam,
   $auth_pam_plugin             = $mariadb::params::auth_pam_plugin,
@@ -82,7 +79,8 @@ class mariadb::cluster (
 
   validate_bool($manage_user, $manage_repo, $dev)
 
-  $options = mysql_deepmerge($mariadb::params::cluster_default_options, $override_options)
+  $cluster_options = mysql_deepmerge($mariadb::params::cluster_default_options, $override_options)
+  $galera_options = mysql_deepmerge($mariadb::params::galera_default_options, $galera_override_options)
 
   if $manage_repo {
     class { '::mariadb::repo':
