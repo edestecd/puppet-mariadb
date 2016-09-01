@@ -1,0 +1,37 @@
+#
+# These groups are read by MariaDB command-line tools
+# Use it for options that affect only one utility
+#
+
+# The following options will be passed to all MySQL clients
+[client]
+port = 3306
+#max_allowed_packet = 600M
+default-character-set = utf8
+
+[mysql]
+no-auto-rehash
+
+[mysql_upgrade]
+
+[mysqladmin]
+
+[mysqlbinlog]
+
+[mysqlcheck]
+
+[mysqldump]
+quick
+#max_allowed_packet = 16M
+max_allowed_packet = 32M
+#max_allowed_packet = 600M
+#skip-extended-insert
+#order-by-primary
+#single-transaction
+#hex-blob
+
+[mysqlimport]
+
+[mysqlshow]
+
+[mysqlslap]

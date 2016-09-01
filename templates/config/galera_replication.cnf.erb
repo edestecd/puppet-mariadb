@@ -1,0 +1,24 @@
+# Deployment MariaDB Galera Cluster config for cluster nodes
+# WARNING: this file has been automatically setup by Puppet
+# Please make changes there and rerun setup, not here, as they will be overwritten....
+
+[mysqld]
+wsrep_provider = <%= @wsrep_provider %>
+wsrep_cluster_address = 'gcomm://<%= @wsrep_cluster_peers %>'
+wsrep_cluster_name = <%= @wsrep_cluster_name %>
+<% unless @wsrep_sst_password == 'UNSET' -%>
+wsrep_sst_auth = '<%= "#{@wsrep_sst_user}:#{@wsrep_sst_password}" %>'
+<% end -%>
+wsrep_sst_method = <%= @wsrep_sst_method %>
+wsrep_slave_threads = <%= @wsrep_slave_threads %>
+wsrep_node_address = <%= instance_variable_get("@ipaddress_#{@wsrep_cluster_iface}") %>
+wsrep_node_incoming_address = <%= instance_variable_get("@ipaddress_#{@wsrep_cluster_iface}") %>
+
+binlog_format = ROW
+default_storage_engine = InnoDB
+innodb_autoinc_lock_mode = 2
+innodb_doublewrite = 1
+query_cache_size = 0
+
+innodb_flush_log_at_trx_commit = 2
+#innodb_locks_unsafe_for_binlog = 1
