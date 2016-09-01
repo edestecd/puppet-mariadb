@@ -74,6 +74,10 @@ class mariadb::cluster (
   $auth_pam                    = $mariadb::params::auth_pam,
   $auth_pam_plugin             = $mariadb::params::auth_pam_plugin,
   $storeconfigs_enabled        = false,
+
+  $users                       = {},
+  $grants                      = {},
+  $databases                   = {},
 ) inherits mariadb::params {
 
   validate_bool($manage_user, $manage_repo, $dev)

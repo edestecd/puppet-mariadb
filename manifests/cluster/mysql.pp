@@ -34,6 +34,9 @@ class mariadb::cluster::mysql {
     service_enabled         => $mariadb::cluster::service_enabled,
     service_manage          => $mariadb::cluster::service_manage,
     service_name            => 'mysql',
+    users                   => $mariadb::cluster::users,
+    grants                  => $mariadb::cluster::grants,
+    databases               => $mariadb::cluster::databases,
   }
 
   anchor { 'mariadb::cluster::mysql::start': } ->
