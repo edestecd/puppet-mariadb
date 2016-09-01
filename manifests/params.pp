@@ -16,6 +16,9 @@ class mariadb::params {
   if ($::osfamily == 'RedHat') and (versioncmp($::operatingsystemrelease, '6.0') >= 0) {
     #### client specific vars ####
     # client.pp
+    $client_package_name    = 'MariaDB-client'
+    $shared_package_name    = 'MariaDB-shared'
+    $devel_package_name     = 'MariaDB-devel'
     $client_default_options = {
       'client' => {
         'port' => '3306',
@@ -24,6 +27,14 @@ class mariadb::params {
         'max_allowed_packet' => '16M',
         'quick'              => true,
         'quote-names'        => true,
+      },
+    }
+
+    # server.pp
+    $server_package_name    = 'MariaDB-server'
+    $server_default_options = {
+      'mysqld' => {
+        'innodb_file_per_table' => 'ON',
       },
     }
 
@@ -55,7 +66,8 @@ class mariadb::params {
     $wsrep_node_incoming_address = $::ipaddress
     $root_password               = 'UNSET'
 
-    # mysql.pp
+    # cluster.pp
+    $cluster_package_name    = 'MariaDB-Galera-server'
     $cluster_default_options = {
       'mysqld' => {
         'bind-address'          => '0.0.0.0',

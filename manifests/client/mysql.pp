@@ -8,17 +8,17 @@ class mariadb::client::mysql (
 
   class { '::mysql::client':
     package_ensure => installed,
-    package_name   => 'MariaDB-client',
+    package_name   => $mariadb::params::client_package_name,
   }
 
   if $dev {
     class { '::mysql::bindings':
       client_dev                => true,
       client_dev_package_ensure => installed,
-      client_dev_package_name   => 'MariaDB-shared',
+      client_dev_package_name   => $mariadb::params::shared_package_name,
       daemon_dev                => true,
       daemon_dev_package_ensure => installed,
-      daemon_dev_package_name   => 'MariaDB-devel',
+      daemon_dev_package_name   => $mariadb::params::devel_package_name,
     }
 
     Class['::mysql::client'] ->
