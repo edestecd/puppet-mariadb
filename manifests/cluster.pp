@@ -77,10 +77,10 @@ class mariadb::cluster (
   $databases                   = {},
 ) inherits mariadb::params {
 
-  validate_bool($manage_user, $manage_repo, $dev)
+  validate_bool($manage_repo)
 
   $cluster_options = mysql_deepmerge($mariadb::params::cluster_default_options, $override_options)
-  $galera_options = mysql_deepmerge($mariadb::params::galera_default_options, $galera_override_options)
+  $galera_options  = mysql_deepmerge($mariadb::params::galera_default_options, $galera_override_options)
 
   if $manage_repo {
     class { '::mariadb::repo':
@@ -89,31 +89,36 @@ class mariadb::cluster (
     }
   }
 
-  if $manage_user {
-    Anchor['mariadb::cluster::start'] ->
-    class { '::mariadb::cluster::user': } ->
-    Class['mariadb::client::mysql']
-  }
-
-  if $manage_timezone {
-    Class['mariadb::cluster::galera_config'] ->
-    class { '::mariadb::cluster::timezone': } ->
-    Anchor['mariadb::cluster::end']
-  }
-
   anchor { 'mariadb::cluster::start': } ->
-  class { '::mariadb::client::mysql': dev => $dev } ->
-  class { '::mariadb::cluster::mysql': } ->
+  class { '::mariadb::server':
+    manage_user          => $manage_user,
+    manage_timezone      => $manage_timezone,
+    manage_repo          => false,
+    dev                  => $dev,
+    cluster              => true,
+    restart              => $restart,
+    service_enabled      => $service_enabled,
+    service_manage       => $service_manage,
+    user                 => $user,
+    comment              => $comment,
+    uid                  => $uid,
+    gid                  => $gid,
+    home                 => $home,
+    shell                => $shell,
+    group                => $group,
+    groups               => $groups,
+    config_file          => $config_file,
+    includedir           => $includedir,
+    config_dir           => $config_dir,
+    root_password        => $root_password,
+    auth_pam             => $auth_pam,
+    auth_pam_plugin      => $auth_pam_plugin,
+    storeconfigs_enabled => $storeconfigs_enabled,
+    users                => $users,
+    grants               => $grants,
+    databases            => $databases,
+  } ->
   class { '::mariadb::cluster::auth': } ->
   class { '::mariadb::cluster::galera_config': } ->
   anchor { 'mariadb::cluster::end': }
-
-  if $::settings::storeconfigs and $storeconfigs_enabled {
-    Mysql::Db <<| tag == $::domain |>> {
-      require => Anchor['mariadb::cluster::end'],
-    } ->
-    Mariadb::Db_grant <<| tag == $::domain |>> {
-      require => Anchor['mariadb::cluster::end'],
-    }
-  }
 }

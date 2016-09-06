@@ -11,7 +11,7 @@
 #
 #
 
-class mariadb::cluster::timezone {
+class mariadb::server::timezone {
 
   $tzinfo_command   = 'mysql_tzinfo_to_sql /usr/share/zoneinfo'
   # replicate_myisam is failing here... so disable it and do it on all nodes instead
