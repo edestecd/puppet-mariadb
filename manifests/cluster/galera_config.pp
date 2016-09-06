@@ -38,6 +38,13 @@ class mariadb::cluster::galera_config {
   $options = mysql_deepmerge($options_from_params, $mariadb::cluster::galera_options)
   $includedir = false
 
+  if $mariadb::cluster::wsrep_sst_method in ['xtrabackup', 'xtrabackup-v2'] {
+    package { 'percona-xtrabackup':
+      ensure => installed,
+      before => File["${mariadb::cluster::config_dir}/cluster.cnf"],
+    }
+  }
+
   file { "${mariadb::cluster::config_dir}/cluster.cnf":
     ensure  => file,
     owner   => 'root',

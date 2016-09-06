@@ -15,13 +15,6 @@ class mariadb::cluster::mysql {
     $auth_pam_options = {}
   }
 
-  if $mariadb::cluster::wsrep_sst_method in ['xtrabackup', 'xtrabackup-v2'] {
-    package { 'percona-xtrabackup':
-      ensure => installed,
-      before => Class['::mysql::server'],
-    }
-  }
-
   # https://mariadb.com/kb/en/mariadb/yum/#installing-mariadb-galera-cluster-with-yum
   # Galera Cluster is included in the default MariaDB packages from 10.1,
   if versioncmp($mariadb::cluster::repo_version, '10.1') >= 0 {
