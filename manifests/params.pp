@@ -62,21 +62,21 @@ class mariadb::params {
 
     # user.pp
     $user    = 'mysql'
-    $comment = 'MySQL server'
+    $comment = 'MySQL Server'
     $uid     = 494
     $gid     = 494
     $home    = '/var/lib/mysql'
-    $shell   = '/sbin/nologin'
+    $shell   = '/bin/false'
     $group   = 'mysql'
     $groups  = undef
 
     # config.pp
-    $log_error      = '/var/lib/mysql/mysqld.log'
-    $config_file    = '/etc/my.cnf.d/server.cnf'
-    $includedir     = '' # lint:ignore:empty_string_assignment
-    $config_dir     = '/etc/my.cnf.d'
-    $pidfile        = '/var/lib/mysql/mysqld.pid'
-    $wsrep_provider = '/usr/lib64/galera/libgalera_smm.so'
+    $log_error      = undef
+    $config_file    = '/etc/mysql/my.cnf'
+    $includedir     = '/etc/mysql/conf.d'
+    $config_dir     = '/etc/mysql/conf.d'
+    $pidfile        = '/var/run/mysqld/mysqld.pid'
+    $wsrep_provider = '/usr/lib/galera/libgalera_smm.so'
 
     # server.pp
     $server_package_name = 'mariadb-server'
