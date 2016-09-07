@@ -57,8 +57,8 @@ class mariadb::params {
   ) {
     # client.pp
     $client_package_name = 'mariadb-client'
-    $shared_package_name = 'mariadb-shared'
-    $devel_package_name  = 'mariadb-devel'
+    $shared_package_name = undef
+    $devel_package_name  = 'libmariadbd-dev'
 
     # user.pp
     $user    = 'mysql'

@@ -15,10 +15,10 @@ class mariadb::client::mysql (
     class { '::mysql::bindings':
       client_dev                => true,
       client_dev_package_ensure => installed,
-      client_dev_package_name   => $mariadb::params::shared_package_name,
-      daemon_dev                => true,
+      client_dev_package_name   => $mariadb::params::devel_package_name,
+      daemon_dev                => $mariadb::params::shared_package_name,
       daemon_dev_package_ensure => installed,
-      daemon_dev_package_name   => $mariadb::params::devel_package_name,
+      daemon_dev_package_name   => $mariadb::params::shared_package_name,
     }
 
     Class['::mysql::client'] ->
