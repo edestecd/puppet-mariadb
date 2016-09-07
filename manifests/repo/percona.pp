@@ -11,9 +11,7 @@ class mariadb::repo::percona {
       anchor { 'mariadb::repo::percona::end': }
     }
     'Debian': {
-      anchor { 'mariadb::repo::percona::start': } ->
-      class { '::mariadb::repo::percona::apt': } ->
-      anchor { 'mariadb::repo::percona::end': }
+      class { '::mariadb::repo::percona::apt': }
     }
     default: {
       fail("Unsupported managed repository for osfamily: ${::osfamily}, module ${module_name} currently only supports managing repos for osfamily RedHat and Debian")
