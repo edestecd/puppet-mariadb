@@ -9,6 +9,8 @@ describe 'mariadb::server', :type => :class do
 
       context 'with defaults' do
         it { is_expected.to compile.with_all_deps }
+        it { is_expected.to contain_class('mariadb::repo') }
+        it { is_expected.to contain_class('mariadb::client::mysql') }
         it { is_expected.to contain_class('mariadb::server::mysql') }
       end
     end
