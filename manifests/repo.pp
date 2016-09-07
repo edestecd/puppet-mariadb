@@ -34,4 +34,8 @@ class mariadb::repo (
       fail("Unsupported managed repository for osfamily: ${::osfamily}, module ${module_name} currently only supports managing repos for osfamily RedHat and Debian")
     }
   }
+
+  if $percona_repo {
+    include '::mariadb::repo::percona'
+  }
 }

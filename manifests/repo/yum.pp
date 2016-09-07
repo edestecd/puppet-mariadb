@@ -17,17 +17,4 @@ class mariadb::repo::yum {
   # lint:ignore:spaceship_operator_without_tag
   Yumrepo['mariadb'] -> Package<| |>
   # lint:endignore
-
-  if $mariadb::repo::percona_repo {
-    yumrepo { 'percona-release':
-      baseurl  => "http://repo.percona.com/release/${::operatingsystemmajrelease}/RPMS/${::architecture}",
-      descr    => 'Percona-Release',
-      enabled  => '1',
-      gpgcheck => '1',
-      gpgkey   => 'https://www.percona.com/downloads/RPM-GPG-KEY-percona',
-    }
-    # lint:ignore:spaceship_operator_without_tag
-    Yumrepo['percona-release'] -> Package<| |>
-    # lint:endignore
-  }
 }

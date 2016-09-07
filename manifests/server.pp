@@ -13,7 +13,7 @@ class mariadb::server (
   $repo_version         = $mariadb::params::repo_version,
   $dev                  = true,
   $cluster              = false,
-  $restart              = false,
+  $restart              = true,
   $service_enabled      = true,
   $service_manage       = true,
 

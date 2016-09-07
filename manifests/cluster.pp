@@ -82,18 +82,11 @@ class mariadb::cluster (
   $cluster_options = mysql_deepmerge($mariadb::params::cluster_default_options, $override_options)
   $galera_options  = mysql_deepmerge($mariadb::params::galera_default_options, $galera_override_options)
 
-  if $manage_repo {
-    class { '::mariadb::repo':
-      repo_version => $repo_version,
-      percona_repo => ($wsrep_sst_method in ['xtrabackup', 'xtrabackup-v2']),
-    }
-  }
-
   anchor { 'mariadb::cluster::start': } ->
   class { '::mariadb::server':
     manage_user          => $manage_user,
     manage_timezone      => $manage_timezone,
-    manage_repo          => false,
+    manage_repo          => $manage_repo,
     dev                  => $dev,
     cluster              => true,
     restart              => $restart,
