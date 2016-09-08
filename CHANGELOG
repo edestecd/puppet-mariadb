@@ -1,2 +1,6 @@
+2016-09-08 (0.5.0)  Chris Edester
+        * Initial working version with support for Debian, RedHat
+        * Supports Client, Server, Cluster, Repo
+
 2016-08-29 (0.0.1)  Chris Edester
         * Initial Import from Dragonfly project

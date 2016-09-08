@@ -30,6 +30,7 @@ The mariadb module provides some classes to install and configure:
 * MariaDB Client
 * MariaDB Galera Cluster
 * MariaDB Server
+* MariaDB Repo
 
 ##Setup
 
@@ -124,6 +125,7 @@ mariadb::cluster::galera_override_options:
 * mariadb::client
 * mariadb::cluster
 * mariadb::server
+* mariadb::repo
 
 ##Limitations
 
