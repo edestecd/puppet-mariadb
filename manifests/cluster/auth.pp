@@ -17,6 +17,7 @@ class mariadb::cluster::auth {
       user       => "${mariadb::cluster::wsrep_sst_user}@%",
       table      => '*.*',
       privileges => ['ALL'],
+      options    => $mariadb::cluster::wsrep_sst_user_grant_options,
       require    => Mysql_user["${mariadb::cluster::wsrep_sst_user}@%"],
     }
   }
