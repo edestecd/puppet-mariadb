@@ -24,7 +24,8 @@ end
 Facter.add(:wsrep_node_name) do
   setcode do
     if Facter::Util::Resolution.which('mysql') && File.file?(defaults_extra_file)
-      Facter::Util::Resolution.exec(mysql_execute('SELECT @@wsrep_node_name;'))
+      query = Facter::Util::Resolution.exec(mysql_execute("SHOW VARIABLES LIKE 'wsrep_node_name';"))
+      query.split("\t").last unless !query || query.empty?
     end
   end
 end

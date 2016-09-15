@@ -24,7 +24,8 @@ end
 Facter.add(:wsrep_cluster_name) do
   setcode do
     if Facter::Util::Resolution.which('mysql') && File.file?(defaults_extra_file)
-      Facter::Util::Resolution.exec(mysql_execute('SELECT @@wsrep_cluster_name;'))
+      query = Facter::Util::Resolution.exec(mysql_execute("SHOW VARIABLES LIKE 'wsrep_cluster_name';"))
+      query.split("\t").last unless !query || query.empty?
     end
   end
 end
