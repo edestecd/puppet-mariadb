@@ -13,6 +13,11 @@ class mariadb::params {
   $auth_pam        = true
   $auth_pam_plugin = 'auth_pam.so'
 
+  $service_name = $::service_provider ? {
+    'systemd' => 'mariadb',
+    default   => 'mysql',
+  }
+
   # wsrep patch config
   $wsrep_cluster_address = undef
   $wsrep_cluster_peers   = undef

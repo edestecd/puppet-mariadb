@@ -41,7 +41,7 @@ class mariadb::server::mysql (
     root_password           => $mariadb::server::root_password,
     service_enabled         => $mariadb::server::service_enabled,
     service_manage          => $mariadb::server::service_manage,
-    service_name            => 'mysql',
+    service_name            => $mariadb::server::service_name,
     users                   => $mariadb::server::users,
     grants                  => $mariadb::server::grants,
     databases               => $mariadb::server::databases,

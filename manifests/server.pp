@@ -16,6 +16,7 @@ class mariadb::server (
   $restart              = true,
   $service_enabled      = true,
   $service_manage       = true,
+  $service_name         = $mariadb::params::service_name,
 
   $user                 = $mariadb::params::user,
   $comment              = $mariadb::params::comment,
