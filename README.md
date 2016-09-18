@@ -26,6 +26,15 @@ Puppet Module to install/configure MariaDB client/cluster/server
 
 ##Module Description
 
+Uses the [puppetlabs/mysql](https://forge.puppet.com/puppetlabs/mysql) module to provide install/config/service/types/etc management.
+
+This module basically manages the [official mariadb repo](https://downloads.mariadb.org/mariadb/repositories)
+and wraps the mysql module with the correct params to switch to the maria packages.  
+
+For the cluster, it also provides management of the wsrep mysql user and galera/wsrep specific config in a separate file.  
+
+Also provided are wsrep var and status facts to monitor your cluster from your fav fact reporter ;)  
+
 The mariadb module provides some classes to install and configure:
 * MariaDB Client
 * MariaDB Galera Cluster
@@ -84,12 +93,16 @@ class { 'mariadb::cluster':
   wsrep_sst_method        => 'xtrabackup-v2',
   root_password           => 'another_secret_password',
   override_options        => {
-    'performance_schema'    => undef,
-    'innodb_file_per_table' => 'OFF',
+    'mysqld' => {
+      'performance_schema'    => undef,
+      'innodb_file_per_table' => 'OFF',
+    },
   },
   galera_override_options => {
-    'wsrep_slave_threads'            => '2',
-    'innodb_flush_log_at_trx_commit' => '0',
+    'mysqld' => {
+      'wsrep_slave_threads'            => '2',
+      'innodb_flush_log_at_trx_commit' => '0',
+    },
   }
 }
 ```
@@ -111,11 +124,13 @@ mariadb::cluster::wsrep_sst_method: rsync
 mariadb::cluster::root_password: another_secret_password
 
 mariadb::cluster::override_options:
-  performance_schema: OFF
-  innodb_file_per_table: OFF
+  mysqld:
+    performance_schema: OFF
+    innodb_file_per_table: OFF
 mariadb::cluster::galera_override_options:
-  wsrep_slave_threads: 2
-  innodb_flush_log_at_trx_commit: 0
+  mysqld:
+    wsrep_slave_threads: 2
+    innodb_flush_log_at_trx_commit: 0
 ```
 
 ##Reference
