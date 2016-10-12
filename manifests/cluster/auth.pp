@@ -6,19 +6,12 @@
 class mariadb::cluster::auth {
 
   if $mariadb::cluster::wsrep_sst_password != 'UNSET' {
-    mysql_user { "${mariadb::cluster::wsrep_sst_user}@%":
-      ensure        => present,
-      password_hash => mysql_password($mariadb::cluster::wsrep_sst_password),
-      require       => Class['::mysql::server::root_password'],
-    }
+    $wsrep_sst_peers = any2array($mariadb::cluster::wsrep_sst_user_peers)
+    $wsrep_sst_users = prefix($wsrep_sst_peers, "${mariadb::cluster::wsrep_sst_user}@")
 
-    mysql_grant { "${mariadb::cluster::wsrep_sst_user}@%/*.*":
-      ensure     => present,
-      user       => "${mariadb::cluster::wsrep_sst_user}@%",
-      table      => '*.*',
-      privileges => ['ALL'],
-      options    => $mariadb::cluster::wsrep_sst_user_grant_options,
-      require    => Mysql_user["${mariadb::cluster::wsrep_sst_user}@%"],
+    mariadb::cluster::wsrep_sst_user { $wsrep_sst_users:
+      wsrep_sst_password           => $mariadb::cluster::wsrep_sst_password,
+      wsrep_sst_user_grant_options => $mariadb::cluster::wsrep_sst_user_grant_options,
     }
   }
 }

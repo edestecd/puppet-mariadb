@@ -62,6 +62,7 @@ class mariadb::cluster (
   $wsrep_cluster_peers          = $mariadb::params::wsrep_cluster_peers,
   $wsrep_cluster_name           = $mariadb::params::wsrep_cluster_name,
   $wsrep_sst_user               = $mariadb::params::wsrep_sst_user,
+  $wsrep_sst_user_peers         = $mariadb::params::wsrep_sst_user_peers,
   $wsrep_sst_password           = $mariadb::params::wsrep_sst_password,
   $wsrep_sst_user_grant_options = undef,
   $wsrep_sst_method             = $mariadb::params::wsrep_sst_method,

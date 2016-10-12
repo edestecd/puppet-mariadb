@@ -23,6 +23,7 @@ class mariadb::params {
   $wsrep_cluster_peers   = undef
   $wsrep_cluster_name    = undef
   $wsrep_sst_user        = 'wsrep_sst'
+  $wsrep_sst_user_peers  = '%'
   $wsrep_sst_password    = 'UNSET'
   $wsrep_sst_method      = 'mysqldump'
   $root_password         = 'UNSET'
