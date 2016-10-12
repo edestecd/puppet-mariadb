@@ -53,9 +53,9 @@ class mariadb::cluster::galera_config {
 
   file { "${mariadb::cluster::config_dir}/cluster.cnf":
     ensure  => file,
-    owner   => 'root',
+    owner   => $mariadb::cluster::user,
     group   => $mysql::params::root_group,
-    mode    => '0644',
+    mode    => '0600',
     content => template('mysql/my.cnf.erb'),
   }
 }
