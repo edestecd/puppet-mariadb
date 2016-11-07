@@ -11,6 +11,7 @@ class mariadb::cluster::auth {
 
     mariadb::cluster::wsrep_sst_user { $wsrep_sst_users:
       wsrep_sst_password           => $mariadb::cluster::wsrep_sst_password,
+      wsrep_sst_user_tls_options   => $mariadb::cluster::wsrep_sst_user_tls_options,
       wsrep_sst_user_grant_options => $mariadb::cluster::wsrep_sst_user_grant_options,
     }
   }
