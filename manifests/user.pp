@@ -4,9 +4,9 @@
 #       privileges => ['all'],
 #       host => 'localhost',
 #   }
-define mariadb::user($password, $database, $privileges = 'ALL', $host = 'localhost') {
+define mariadb::user($password, $privileges = 'ALL', $host = 'localhost') {
   include '::mysql::client'
-  
+
   $username = name
   $user_resource = {
     ensure => 'present',
