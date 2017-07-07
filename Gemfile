@@ -1,11 +1,8 @@
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 group :unit_tests do
-  gem 'rubocop',                                                   :require => false
-  gem 'puppetlabs_spec_helper',                                    :require => false
-  gem 'rspec-puppet-facts',                                        :require => false
-  gem 'metadata-json-lint',                                        :require => false
   gem 'json',                                                      :require => false
+  gem 'metadata-json-lint',                                        :require => false
   gem 'puppet-lint-absolute_classname-check',                      :require => false
   gem 'puppet-lint-absolute_template_path',                        :require => false
   gem 'puppet-lint-alias-check',                                   :require => false
@@ -27,12 +24,15 @@ group :unit_tests do
   gem 'puppet-lint-usascii_format-check',                          :require => false
   gem 'puppet-lint-variable_contains_upcase',                      :require => false
   gem 'puppet-lint-version_comparison-check',                      :require => false
+  gem 'puppetlabs_spec_helper',                                    :require => false
+  gem 'rspec-puppet-facts',                                        :require => false
+  gem 'rubocop',                                                   :require => false
 end
 
 group :development do
+  gem 'librarian-puppet', :require => false
   gem 'simplecov',        :require => false
   # gem 'guard-rake',       :require => false
-  gem 'librarian-puppet', :require => false
 end
 
 group :system_tests do
