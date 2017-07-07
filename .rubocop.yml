@@ -20,6 +20,23 @@ AllCops:
     - 'vendor/**/*'
   DisplayCopNames: true
 
+#################### Layout ###############################
+
+# The shebang stuff at the top triggers this
+Layout/LeadingCommentSpace:
+  Exclude:
+    - Puppetfile
+
+#################### Style ###############################
+
+# Cop supports --auto-correct.
+# Configuration parameters: SupportedStyles.
+# Support ruby 1.8.7
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+
+#################### Metrics ###############################
+
 Metrics/LineLength:
   # Ruduce this... Max: 80
   Max: 111
@@ -28,13 +45,7 @@ Metrics/BlockLength:
   # Ruduce this... Max: 25
   Max: 27
 
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles.
-# Support ruby 1.8.7
-Style/HashSyntax:
-  EnforcedStyle: hash_rockets
+##################### Bundler ##############################
 
-# The shebang stuff at the top triggers this
-Style/LeadingCommentSpace:
-  Exclude:
-    - Puppetfile
+Bundler/DuplicatedGem:
+  Enabled: false
