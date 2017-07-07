@@ -20,11 +20,11 @@ mariadb
 6. [Development - Guide for contributing to the module](#development)
 7. [Contributors](#contributors)
 
-##Overview
+## Overview
 
 Puppet Module to install/configure MariaDB client/cluster/server
 
-##Module Description
+## Module Description
 
 Uses the [puppetlabs/mysql](https://forge.puppet.com/puppetlabs/mysql) module to provide install/config/service/types/etc management.
 
@@ -41,20 +41,20 @@ The mariadb module provides some classes to install and configure:
 * MariaDB Server
 * MariaDB Repo
 
-##Setup
+## Setup
 
-###What mariadb affects
+### What mariadb affects
 
 * mariadb package install
 * mariadb config files
 * mariadb services
 * mariadb user/group (optional)
 
-###Setup Requirements
+### Setup Requirements
 
 only need to install the module
 
-###Beginning with mariadb
+### Beginning with mariadb
 
 Minimal mariadb client install for command line use:
 
@@ -62,9 +62,9 @@ Minimal mariadb client install for command line use:
 include mariadb::client
 ```
 
-##Usage
+## Usage
 
-###Manage the server with pam authentication
+### Manage the server with pam authentication
 
 ```puppet
 class { 'mariadb::server':
@@ -72,7 +72,7 @@ class { 'mariadb::server':
 }
 ```
 
-###Also manage the server user and group
+### Also manage the server user and group
 
 ```puppet
 class { 'mariadb::server':
@@ -83,7 +83,7 @@ class { 'mariadb::server':
 }
 ```
 
-###Customize the cluster config
+### Customize the cluster config
 
 ```puppet
 class { 'mariadb::cluster':
@@ -107,7 +107,7 @@ class { 'mariadb::cluster':
 }
 ```
 
-###Configure with hiera yaml
+### Configure with hiera yaml
 
 ```puppet
 include mariadb::cluster
@@ -132,8 +132,58 @@ mariadb::cluster::galera_override_options:
     wsrep_slave_threads: 2
     innodb_flush_log_at_trx_commit: 0
 ```
+## Adding Users:
+```
+mysql::users => {
+  'someuser@localhost' => {
+    ensure                   => 'present',
+    max_connections_per_hour => '0',
+    max_queries_per_hour     => '0',
+    max_updates_per_hour     => '0',
+    max_user_connections     => '0',
+    password_hash            => '*F3A2A51A9B0F2BE2468926B4132313728C250DBF',
+    tls_options              => ['NONE'],
+  },
+}
+OR with DB:
+ @@mysql::db { "mydb_${fqdn}":
+  user     => 'myuser',
+  password => 'mypass',
+  dbname   => 'mydb',
+  host     => ${fqdn},
+  grant    => ['SELECT', 'UPDATE'],
+  tag      => $domain,
+}
 
-##Reference
+OR just handout Grants:
+grants => {
+  'someuser@localhost/somedb.*' => {
+    ensure     => 'present',
+    options    => ['GRANT'],
+    privileges => ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
+    table      => 'somedb.*',
+    user       => 'someuser@localhost',
+  },
+}
+```
+## Ensure that a DB is Present:
+```
+databases   => {
+  'somedb'  => {
+    ensure  => 'present',
+    charset => 'utf8',
+  },
+}
+```
+
+## Loading a Plugin:
+```
+mysql_plugin { 'auth_socket':
+  ensure     => 'present',
+  soname     => 'auth_socket.so',
+}
+```
+## Reference
 
 ### Classes
 
@@ -142,7 +192,7 @@ mariadb::cluster::galera_override_options:
 * mariadb::server
 * mariadb::repo
 
-##Limitations
+## Limitations
 
 This module has been built on and tested against Puppet 3.8 and higher.  
 While I am sure other versions work, I have not tested them.
@@ -150,6 +200,6 @@ While I am sure other versions work, I have not tested them.
 This module supports modern RedHat and Debian based systems.  
 No plans to support other versions (unless you add it :)..
 
-##Development
+## Development
 
 Pull Requests welcome
