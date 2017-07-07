@@ -13,8 +13,8 @@ class mariadb::repo::percona::apt {
         }
     }
 
-    apt::source {
-        'percona-release': location => 'http://repo.percona.com/apt',
+    apt::source {'percona-release': 
+        location => 'http://repo.percona.com/apt',
         repos => 'main',
         key => $key,
     }
