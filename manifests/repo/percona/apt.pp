@@ -1,9 +1,12 @@
+# apt.pp
 # Manage the percona apt repo.
+# with different keys for ubuntu and debian
+#
 
 class mariadb::repo::percona::apt {
-    include::apt
+    include ::apt
 
-    if ($::operatingsystem == 'Debian'and versioncmp($::operatingsystemrelease, '8.0') >= 0) or ($::operatingsystem == 'Ubuntu' and versioncmp($::operatingsystemrelease, '16.04') >= 0) {
+    if ($::operatingsystem == 'Debian' and versioncmp($::operatingsystemrelease, '8.0') >= 0) or ($::operatingsystem == 'Ubuntu' and versioncmp($::operatin$
         $key = {
             'id' => '4D1BB29D63D98E422B2113B19334A25F8507EFA5',
         }
@@ -13,10 +16,12 @@ class mariadb::repo::percona::apt {
         }
     }
 
-    apt::source {'percona-release': 
-        location => 'http://repo.percona.com/apt',
+    apt::source {
+        'percona-release': location => 'http://repo.percona.com/apt',
         repos => 'main',
         key => $key,
     }
-    Apt::Source['percona-release'] - > Class['apt::update'] - > Package < | tag == 'percona' | >
+    Apt::Source['percona-release'] -> Class['apt::update'] -> Package<| tag == 'percona' |>
 }
+
+
