@@ -1,14 +1,14 @@
 # Sample Usage:
 #   mariadb::database { "dbname" :
-#       $host = 'localhost', 
-#       $ensure = 'present',
-#       $charset = 'utf8', 
-#       $collate = 'utf8_general_ci'
+#       host = 'localhost', 
+#       dbname => 'dbname', 
+#       ensure => 'present',
+#       charset => 'utf8', 
+#       collate => 'utf8_general_ci'
 #   }
-define mariadb::database($host = 'localhost', $ensure = 'present', $charset = 'utf8', $collate = 'utf8_general_ci' ) {
+define mariadb::utility::database($dbname,$host = 'localhost', $ensure = 'present', $charset = 'utf8', $collate = 'utf8_general_ci' ) {
   include '::mysql::client'
 
-  $dbname = name
   $db_resource = {
     ensure => $ensure,
     charset => $charset,
