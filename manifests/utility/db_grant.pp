@@ -11,8 +11,7 @@ define mariadb::utility::db_grant (
   #input validation
   validate_re($ensure, '^(present|absent)$',
   "${ensure} is not supported for ensure. Allowed values are 'present' and 'absent'.")
-  $table = "${dbname}.${table}"
-
+  
   include '::mysql::client'
 
   $grant_resource = {
@@ -20,7 +19,7 @@ define mariadb::utility::db_grant (
     privileges => $grant,
     provider   => 'mysql',
     user       => "${user}@${host}",
-    table      => $table,
+    table      => "${dbname}.${table}",
     #options    => $options,
     require    => Class['mysql::server'],
   }
