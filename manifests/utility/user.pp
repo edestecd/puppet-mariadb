@@ -8,6 +8,7 @@ define mariadb::utility::user($password, $ensure  = 'present', $host = 'localhos
   include '::mysql::client'
   
   validate_re($ensure, '^(present|absent)$',
+  "${ensure} is not supported for ensure. Allowed values are 'present' and 'absent'.")
   
   $username = name
   $user_resource = {
