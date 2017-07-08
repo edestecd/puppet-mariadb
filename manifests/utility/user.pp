@@ -4,9 +4,11 @@
 #       privileges => ['all'],
 #       host => 'localhost',
 #   }
-define mariadb::utility::user($password, $host = 'localhost') {
+define mariadb::utility::user($password, $ensure  = 'present', $host = 'localhost') {
   include '::mysql::client'
-
+  
+  validate_re($ensure, '^(present|absent)$',
+  
   $username = name
   $user_resource = {
     ensure => 'present',
