@@ -73,7 +73,7 @@ class mariadb::server (
     Mysql::Db <<| tag == $::domain |>> {
       require => Anchor['mariadb::server::end'],
     } ->
-    Mariadb::utility::db_grant <<| tag == $::domain |>> {
+    Mariadb::Db_grant <<| tag == $::domain |>> {
       require => Anchor['mariadb::server::end'],
     }
   }
