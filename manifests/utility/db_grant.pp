@@ -23,5 +23,5 @@ define mariadb::utility::db_grant (
     #options    => $options,
     require    => Class['mysql::server'],
   }
-  ensure_resource('mysql_grant', "${user}@${host}/${table}", $grant_resource)
+  ensure_resource('mysql_grant', "${user}@${host}/${dbname}.${table}", $grant_resource)
 }
