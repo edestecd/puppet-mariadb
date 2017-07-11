@@ -11,7 +11,7 @@ class mariadb::server (
   $manage_timezone      = $mariadb::params::manage_timezone,
   $manage_repo          = $mariadb::params::manage_repo,
   $repo_version         = $mariadb::params::repo_version,
-  $dev                  = true,
+  $dev                  = false,
   $cluster              = false,
   $restart              = true,
   $service_enabled      = true,
