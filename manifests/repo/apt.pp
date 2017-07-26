@@ -7,7 +7,7 @@ class mariadb::repo::apt {
 
   $version = $mariadb::repo::repo_version
   $os      = $mariadb::repo::os
-  if (($::operatingsystem == 'Debian') and (versioncmp($::operatingsystemrelease, '8.0') >= 0)) or
+  if (($::operatingsystem == 'Debian') and (versioncmp($::operatingsystemrelease, '9.0') >= 0)) or
   (($::operatingsystem == 'Ubuntu') and (versioncmp($::operatingsystemrelease, '16.04') >= 0)) {
     $key = {
       'id' => '177F4010FE56CA3336300305F1656F24C74CD1D8',
