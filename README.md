@@ -6,7 +6,7 @@ mariadb
 [![Puppet Forge Downloads](https://img.shields.io/puppetforge/dt/edestecd/mariadb.svg)](https://forge.puppetlabs.com/edestecd/mariadb)
 [![Puppet Forge Score](https://img.shields.io/puppetforge/f/edestecd/mariadb.svg)](https://forge.puppetlabs.com/edestecd/mariadb/scores)
 
-####Table of Contents
+#### Table of Contents
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
@@ -20,11 +20,11 @@ mariadb
 6. [Development - Guide for contributing to the module](#development)
 7. [Contributors](#contributors)
 
-##Overview
+## Overview
 
 Puppet Module to install/configure MariaDB client/cluster/server
 
-##Module Description
+## Module Description
 
 Uses the [puppetlabs/mysql](https://forge.puppet.com/puppetlabs/mysql) module to provide install/config/service/types/etc management.
 
@@ -41,20 +41,20 @@ The mariadb module provides some classes to install and configure:
 * MariaDB Server
 * MariaDB Repo
 
-##Setup
+## Setup
 
-###What mariadb affects
+### What mariadb affects
 
 * mariadb package install
 * mariadb config files
 * mariadb services
 * mariadb user/group (optional)
 
-###Setup Requirements
+### Setup Requirements
 
 only need to install the module
 
-###Beginning with mariadb
+### Beginning with mariadb
 
 Minimal mariadb client install for command line use:
 
@@ -62,9 +62,9 @@ Minimal mariadb client install for command line use:
 include mariadb::client
 ```
 
-##Usage
+## Usage
 
-###Manage the server with pam authentication
+### Manage the server with pam authentication
 
 ```puppet
 class { 'mariadb::server':
@@ -72,7 +72,7 @@ class { 'mariadb::server':
 }
 ```
 
-###Also manage the server user and group
+### Also manage the server user and group
 
 ```puppet
 class { 'mariadb::server':
@@ -83,7 +83,7 @@ class { 'mariadb::server':
 }
 ```
 
-###Customize the cluster config
+### Customize the cluster config
 
 ```puppet
 class { 'mariadb::cluster':
@@ -107,7 +107,7 @@ class { 'mariadb::cluster':
 }
 ```
 
-###Configure with hiera yaml
+### Configure with hiera yaml
 
 ```puppet
 include mariadb::cluster
@@ -133,7 +133,7 @@ mariadb::cluster::galera_override_options:
     innodb_flush_log_at_trx_commit: 0
 ```
 
-##Reference
+## Reference
 
 ### Classes
 
@@ -142,7 +142,7 @@ mariadb::cluster::galera_override_options:
 * mariadb::server
 * mariadb::repo
 
-##Limitations
+## Limitations
 
 This module has been built on and tested against Puppet 3.8 and higher.  
 While I am sure other versions work, I have not tested them.
@@ -150,6 +150,6 @@ While I am sure other versions work, I have not tested them.
 This module supports modern RedHat and Debian based systems.  
 No plans to support other versions (unless you add it :)..
 
-##Development
+## Development
 
 Pull Requests welcome

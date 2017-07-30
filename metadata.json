@@ -7,7 +7,7 @@
   "source": "https://github.com/edestecd/puppet-mariadb.git",
   "project_page": "https://github.com/edestecd/puppet-mariadb",
   "issues_url": "https://github.com/edestecd/puppet-mariadb/issues",
-  "tags": ["mariadb", "mysql", "database", "db", "relational"],
+  "tags": ["mariadb", "mysql", "database", "db", "relational", "galera", "percona", "codership", "cluster"],
   "description": "Puppet Module to install/configure MariaDB client/cluster/server",
   "dependencies": [
     {"name": "puppetlabs/stdlib", "version_requirement": ">= 4.10.0 < 5.0.0"},
@@ -25,11 +25,11 @@
     },
     {
       "operatingsystem": "Debian",
-      "operatingsystemrelease": ["7", "8"]
+      "operatingsystemrelease": ["8", "9"]
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": ["12.04", "14.04", "16.04"]
+      "operatingsystemrelease": ["14.04", "16.04"]
     }
   ],
   "requirements": [

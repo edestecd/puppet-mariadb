@@ -42,8 +42,7 @@ Metrics/LineLength:
   Max: 111
 
 Metrics/BlockLength:
-  # Ruduce this... Max: 25
-  Max: 27
+  Enabled: false
 
 ##################### Bundler ##############################
 
