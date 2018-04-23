@@ -3,12 +3,9 @@
 #
 
 class mariadb::repo (
-  $repo_version = $mariadb::params::repo_version,
-  $percona_repo = false,
+  Pattern[/^\d+\.?\d*$/] $repo_version = $mariadb::params::repo_version,
+  Boolean $percona_repo = false,
 ) inherits mariadb::params {
-
-  validate_re($repo_version, '^\d+\.?\d*$')
-  validate_bool($percona_repo)
 
   $os = $::operatingsystem ? {
     'RedHat' => 'rhel',

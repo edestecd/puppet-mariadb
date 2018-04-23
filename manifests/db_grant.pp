@@ -5,11 +5,9 @@ define mariadb::db_grant (
   $host    = 'localhost',
   $grant   = 'ALL',
   $options = undef,
-  $ensure  = 'present',
+  Enum['present', 'absent'] $ensure = 'present',
 ) {
-  # input validation
-  validate_re($ensure, '^(present|absent)$',
-  "${ensure} is not supported for ensure. Allowed values are 'present' and 'absent'.")
+
   $table = "${dbname}.*"
 
   include '::mysql::client'

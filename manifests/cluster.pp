@@ -39,7 +39,7 @@
 class mariadb::cluster (
   $manage_user                  = $mariadb::params::manage_user,
   $manage_timezone              = $mariadb::params::manage_timezone,
-  $manage_repo                  = $mariadb::params::manage_repo,
+  Boolean $manage_repo          = $mariadb::params::manage_repo,
   $repo_version                 = $mariadb::params::repo_version,
   $dev                          = true,
   $restart                      = false,
@@ -57,7 +57,7 @@ class mariadb::cluster (
 
   $config_file                  = $mariadb::params::config_file,
   $includedir                   = $mariadb::params::includedir,
-  $config_dir                   = $mariadb::params::config_dir,
+  Stdlib::Absolutepath $config_dir = $mariadb::params::config_dir,
   $wsrep_cluster_address        = $mariadb::params::wsrep_cluster_address,
   $wsrep_cluster_peers          = $mariadb::params::wsrep_cluster_peers,
   $wsrep_cluster_name           = $mariadb::params::wsrep_cluster_name,
@@ -66,7 +66,7 @@ class mariadb::cluster (
   $wsrep_sst_password           = $mariadb::params::wsrep_sst_password,
   $wsrep_sst_user_tls_options   = undef,
   $wsrep_sst_user_grant_options = undef,
-  $wsrep_sst_method             = $mariadb::params::wsrep_sst_method,
+  Enum['mysqldump', 'rsync', 'rsync_wan', 'xtrabackup', 'xtrabackup-v2'] $wsrep_sst_method = $mariadb::params::wsrep_sst_method,
   $root_password                = $mariadb::params::root_password,
   $override_options             = {},
   $galera_override_options      = {},
@@ -79,8 +79,6 @@ class mariadb::cluster (
   $grants                       = {},
   $databases                    = {},
 ) inherits mariadb::params {
-
-  validate_bool($manage_repo)
 
   $cluster_options = mysql_deepmerge($mariadb::params::cluster_default_options, $override_options)
   $galera_options  = mysql_deepmerge($mariadb::params::galera_default_options, $galera_override_options)

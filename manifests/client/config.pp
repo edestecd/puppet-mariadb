@@ -17,8 +17,6 @@
 
 class mariadb::client::config {
 
-  validate_absolute_path($mariadb::client::config_dir)
-
   $options = $mariadb::client::options
   $includedir = false
 

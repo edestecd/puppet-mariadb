@@ -7,11 +7,11 @@
 #
 
 class mariadb::server (
-  $manage_user          = $mariadb::params::manage_user,
+  Boolean $manage_user  = $mariadb::params::manage_user,
   $manage_timezone      = $mariadb::params::manage_timezone,
-  $manage_repo          = $mariadb::params::manage_repo,
+  Boolean $manage_repo  = $mariadb::params::manage_repo,
   $repo_version         = $mariadb::params::repo_version,
-  $dev                  = true,
+  Boolean $dev          = true,
   $cluster              = false,
   $restart              = true,
   $service_enabled      = true,
@@ -30,19 +30,17 @@ class mariadb::server (
   $config_file          = $mariadb::params::config_file,
   $includedir           = $mariadb::params::includedir,
   $config_dir           = $mariadb::params::config_dir,
-  $root_password        = $mariadb::params::root_password,
+  String $root_password = $mariadb::params::root_password,
   $override_options     = {},
 
-  $auth_pam             = $mariadb::params::auth_pam,
-  $auth_pam_plugin      = $mariadb::params::auth_pam_plugin,
+  Boolean $auth_pam     = $mariadb::params::auth_pam,
+  String $auth_pam_plugin = $mariadb::params::auth_pam_plugin,
   $storeconfigs_enabled = false,
 
   $users                = {},
   $grants               = {},
   $databases            = {},
 ) inherits mariadb::params {
-
-  validate_bool($manage_user, $manage_repo, $dev)
 
   $options = mysql_deepmerge($mariadb::params::server_default_options, $override_options)
 

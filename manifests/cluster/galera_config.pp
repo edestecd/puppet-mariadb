@@ -10,9 +10,6 @@
 
 class mariadb::cluster::galera_config {
 
-  validate_absolute_path($mariadb::cluster::config_dir)
-  validate_re($mariadb::cluster::wsrep_sst_method, '^(mysqldump|rsync|rsync_wan|xtrabackup|xtrabackup-v2)$')
-
   if $mariadb::cluster::wsrep_cluster_address {
     $_wsrep_cluster_address = $mariadb::cluster::wsrep_cluster_address
   } elsif is_array($mariadb::cluster::wsrep_cluster_peers) {

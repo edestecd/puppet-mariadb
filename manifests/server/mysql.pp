@@ -3,13 +3,8 @@
 #
 
 class mariadb::server::mysql (
-  $cluster = false,
+  Boolean $cluster = false,
 ){
-
-  validate_bool($cluster, $mariadb::server::auth_pam)
-  validate_string($mariadb::server::auth_pam_plugin)
-
-  validate_string($mariadb::server::root_password)
 
   if $mariadb::server::auth_pam {
     $auth_pam_options = { 'mysqld' => { 'plugin-load' => $mariadb::server::auth_pam_plugin } }
