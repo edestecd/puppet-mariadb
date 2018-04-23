@@ -18,9 +18,9 @@ class mariadb::cluster::backup::mysqldump (
   $backuprotate       = 30,
   $initiator_node     = false,
   $ignore_events      = true,
-  $galara_port        = '4567',
   $delete_before_dump = false,
   $backupdatabases    = [],
+  $file_per_database  = false,
   $include_triggers   = false,
   $include_routines   = false,
   $ensure             = 'present',
@@ -65,19 +65,16 @@ class mariadb::cluster::backup::mysqldump (
     require    => Mysql_user["${backupuser}@localhost"],
   }
 
-  $garb_address = join($mariadb::cluster::wsrep_cluster_peers.suffix(":${galara_port}"), ',')
   $wsrep_provider_options = $galera_options['wsrep_provider_options'] ? {
     undef   => undef,
     default => ";${galera_options['wsrep_provider_options']}",
   }
 
-  $_wsrep_provider_options = $wsrep_provider_options.delete("'")
-
   # lint:ignore:strict_indent
   $garbd_conf = @("END"/L)
-    address = gcomm://${garb_address}
+    address = ${galera_options['wsrep_cluster_address']}
     group = ${mariadb::cluster::wsrep_cluster_name}
-    options = gmcast.listen_addr=tcp://0.0.0.0:4444${_wsrep_provider_options}
+    options = gmcast.listen_addr=tcp://0.0.0.0:4444${wsrep_provider_options}
     sst = backup
     log = /var/log/garbd.log
   |    END
@@ -89,7 +86,7 @@ class mariadb::cluster::backup::mysqldump (
     mode    => '0700',
     owner   => 'root',
     group   => $::mysql::params::root_group,
-    content => $garbd_conf,
+    content => $garbd_conf.delete("'"),
   }
 
   cron { 'mysql-backup':
@@ -104,9 +101,9 @@ class mariadb::cluster::backup::mysqldump (
   file { 'wsrep_sst_backup':
     ensure  => $ensure,
     path    => '/bin/wsrep_sst_backup',
-    mode    => '0755',
-    owner   => 'root',
-    group   => $mysql::params::root_group,
+    mode    => '0700',
+    owner   => $backupdirowner,
+    group   => $backupdirgroup,
     content => template('mysql/mysqlbackup.sh.erb'),
   }
 

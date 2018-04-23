@@ -13,7 +13,7 @@ class mariadb::cluster::galera_config {
   if $mariadb::cluster::wsrep_cluster_address {
     $_wsrep_cluster_address = $mariadb::cluster::wsrep_cluster_address
   } elsif is_array($mariadb::cluster::wsrep_cluster_peers) {
-    $_wsrep_cluster_peers = join($mariadb::cluster::wsrep_cluster_peers, ',')
+    $_wsrep_cluster_peers = join(suffix($mariadb::cluster::wsrep_cluster_peers, ":${mariadb::cluster::wsrep_cluster_port}"), ',')
     $_wsrep_cluster_address = "'gcomm://${_wsrep_cluster_peers}'"
   } else {
     $_wsrep_cluster_address = undef
