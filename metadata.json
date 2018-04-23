@@ -7,35 +7,69 @@
   "source": "https://github.com/edestecd/puppet-mariadb.git",
   "project_page": "https://github.com/edestecd/puppet-mariadb",
   "issues_url": "https://github.com/edestecd/puppet-mariadb/issues",
-  "tags": ["mariadb", "mysql", "database", "db", "relational", "galera", "percona", "codership", "cluster"],
-  "description": "Puppet Module to install/configure MariaDB client/cluster/server",
   "dependencies": [
-    {"name": "puppetlabs/stdlib", "version_requirement": ">= 4.10.0 < 5.0.0"},
-    {"name": "puppetlabs/apt", "version_requirement": ">= 2.1.1 < 3.0.0"},
-    {"name": "puppetlabs/mysql", "version_requirement": ">= 3.7.0 < 4.0.0"}
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.10.0 < 5.0.0"
+    },
+    {
+      "name": "puppetlabs/apt",
+      "version_requirement": ">= 2.1.1 < 5.0.0"
+    },
+    {
+      "name": "puppetlabs/mysql",
+      "version_requirement": ">= 3.10.0 < 6.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
-      "operatingsystemrelease": ["6", "7"]
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
     },
     {
       "operatingsystem": "CentOS",
-      "operatingsystemrelease": ["6", "7"]
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
     },
     {
       "operatingsystem": "Debian",
-      "operatingsystemrelease": ["8", "9"]
+      "operatingsystemrelease": [
+        "8",
+        "9"
+      ]
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": ["14.04", "16.04"]
+      "operatingsystemrelease": [
+        "14.04",
+        "16.04"
+      ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.0.0 < 5.0.0"
+      "version_requirement": ">= 4.7.0 < 6.0.0"
     }
-  ]
+  ],
+  "tags": [
+    "mariadb",
+    "mysql",
+    "database",
+    "db",
+    "relational",
+    "galera",
+    "percona",
+    "codership",
+    "cluster"
+  ],
+  "description": "Puppet Module to install/configure MariaDB client/cluster/server",
+  "pdk-version": "1.4.1",
+  "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
+  "template-ref": "1.4.1-0-g52adbbb"
 }
