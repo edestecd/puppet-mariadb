@@ -53,27 +53,27 @@ class mariadb::server (
   }
 
   if $manage_user {
-    Anchor['mariadb::server::start'] ->
-    class { '::mariadb::server::user': } ->
-    Class['mariadb::client::mysql']
+    Anchor['mariadb::server::start']
+    -> class { '::mariadb::server::user': }
+    -> Class['mariadb::client::mysql']
   }
 
   if $manage_timezone {
-    Class['mariadb::server::mysql'] ->
-    class { '::mariadb::server::timezone': } ->
-    Anchor['mariadb::server::end']
+    Class['mariadb::server::mysql']
+    -> class { '::mariadb::server::timezone': }
+    -> Anchor['mariadb::server::end']
   }
 
-  anchor { 'mariadb::server::start': } ->
-  class { '::mariadb::client::mysql': dev => $dev } ->
-  class { '::mariadb::server::mysql': cluster => $cluster } ->
-  anchor { 'mariadb::server::end': }
+  anchor { 'mariadb::server::start': }
+  -> class { '::mariadb::client::mysql': dev => $dev }
+  -> class { '::mariadb::server::mysql': cluster => $cluster }
+  -> anchor { 'mariadb::server::end': }
 
   if $::settings::storeconfigs and $storeconfigs_enabled {
     Mysql::Db <<| tag == $::domain |>> {
       require => Anchor['mariadb::server::end'],
-    } ->
-    Mariadb::Db_grant <<| tag == $::domain |>> {
+    }
+    -> Mariadb::Db_grant <<| tag == $::domain |>> {
       require => Anchor['mariadb::server::end'],
     }
   }

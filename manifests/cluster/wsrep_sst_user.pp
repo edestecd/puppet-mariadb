@@ -15,9 +15,9 @@ define mariadb::cluster::wsrep_sst_user (
     password_hash => mysql_password($wsrep_sst_password),
     tls_options   => $wsrep_sst_user_tls_options,
     require       => Class['::mysql::server::root_password'],
-  } ->
+  }
 
-  mysql_grant { "${wsrep_sst_user}/*.*":
+  -> mysql_grant { "${wsrep_sst_user}/*.*":
     ensure     => present,
     user       => $wsrep_sst_user,
     table      => '*.*',

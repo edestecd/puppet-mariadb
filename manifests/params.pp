@@ -5,7 +5,7 @@
 class mariadb::params {
   include '::mysql::params'
 
-  #### init vars ####
+  # ### init vars ####
   $manage_user     = false
   $manage_timezone = false
   $manage_repo     = true
@@ -24,9 +24,9 @@ class mariadb::params {
   $wsrep_cluster_name    = undef
   $wsrep_sst_user        = 'wsrep_sst'
   $wsrep_sst_user_peers  = '%'
-  $wsrep_sst_password    = 'UNSET'
+  $wsrep_sst_password    = 'UNSET' # lint:ignore:security_password_in_code
   $wsrep_sst_method      = 'mysqldump'
-  $root_password         = 'UNSET'
+  $root_password         = 'UNSET' # lint:ignore:security_password_in_code
 
   if ($::osfamily == 'RedHat') and (versioncmp($::operatingsystemrelease, '6.0') >= 0) {
     # client.pp
@@ -135,7 +135,7 @@ class mariadb::params {
       'wsrep_on'                        => 'ON',
       'wsrep_provider'                  => $wsrep_provider,
       'wsrep_node_name'                 => $::hostname,
-      'wsrep_slave_threads'             => '1', #$::processorcount * 2
+      'wsrep_slave_threads'             => '1', # $::processorcount * 2
       'wsrep_node_address'              => $::ipaddress,
       'wsrep_node_incoming_address'     => $::ipaddress,
       'binlog_format'                   => 'ROW',

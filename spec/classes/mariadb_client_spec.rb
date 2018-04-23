@@ -1,11 +1,9 @@
 require 'spec_helper'
 
-describe 'mariadb::client', :type => :class do
+describe 'mariadb::client', type: :class do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
-      let(:facts) do
-        facts.merge(:environment => 'test', :root_home => '/root', :service_provider => 'systemd')
-      end
+      let(:facts) { facts }
 
       context 'with defaults' do
         it { is_expected.to compile.with_all_deps }

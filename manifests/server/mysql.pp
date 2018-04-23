@@ -12,7 +12,7 @@ class mariadb::server::mysql (
   validate_string($mariadb::server::root_password)
 
   if $mariadb::server::auth_pam {
-    $auth_pam_options = {'mysqld' => {'plugin-load' => $mariadb::server::auth_pam_plugin}}
+    $auth_pam_options = { 'mysqld' => { 'plugin-load' => $mariadb::server::auth_pam_plugin } }
   } else {
     $auth_pam_options = {}
   }
@@ -47,7 +47,7 @@ class mariadb::server::mysql (
     databases               => $mariadb::server::databases,
   }
 
-  anchor { 'mariadb::server::mysql::start': } ->
-  Class['::mysql::server'] ->
-  anchor { 'mariadb::server::mysql::end': }
+  anchor { 'mariadb::server::mysql::start': }
+  -> Class['::mysql::server']
+  -> anchor { 'mariadb::server::mysql::end': }
 }

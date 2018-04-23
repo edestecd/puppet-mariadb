@@ -7,7 +7,7 @@ define mariadb::db_grant (
   $options = undef,
   $ensure  = 'present',
 ) {
-  #input validation
+  # input validation
   validate_re($ensure, '^(present|absent)$',
   "${ensure} is not supported for ensure. Allowed values are 'present' and 'absent'.")
   $table = "${dbname}.*"
@@ -20,7 +20,7 @@ define mariadb::db_grant (
     provider   => 'mysql',
     user       => "${user}@${host}",
     table      => $table,
-    #options    => $options,
+    # options    => $options,
     require    => Class['mysql::server'],
   }
   ensure_resource('mysql_grant', "${user}@${host}/${table}", $grant_resource)

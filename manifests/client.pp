@@ -30,8 +30,8 @@ class mariadb::client (
     }
   }
 
-  anchor { 'mariadb::client::start': } ->
-  class { '::mariadb::client::mysql': } ->
-  class { '::mariadb::client::config': } ->
-  anchor { 'mariadb::client::end': }
+  anchor { 'mariadb::client::start': }
+  -> class { '::mariadb::client::mysql': }
+  -> class { '::mariadb::client::config': }
+  -> anchor { 'mariadb::client::end': }
 }

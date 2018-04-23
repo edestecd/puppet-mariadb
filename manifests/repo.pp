@@ -31,7 +31,7 @@ class mariadb::repo (
       include '::mariadb::repo::apt'
     }
     default: {
-      fail("Unsupported managed repository for osfamily: ${::osfamily}, module ${module_name} currently only supports managing repos for osfamily RedHat and Debian")
+      fail("Unsupported managed repository for ${::osfamily}, currently only supports RedHat and Debian")
     }
   }
 
