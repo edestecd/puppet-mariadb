@@ -1,3 +1,14 @@
+2018-04-24 (1.0.0)  Chris Edester
+        * README updates
+        * Create one wsrep_sst_user per peer
+        * socat dependency handled for xtrabackup
+        * wsrep_sst_user tls_options
+        * compatability with newer mysql module
+        * PDK support
+        * Puppet 4/5 support
+        * Drop Puppet 3 support
+        * Add safe cluster mysqldump backup with garbd
+
 2016-09-15 (0.6.0)  Chris Edester
         * Fix Unknown system variable on fact resolution
         * Detect service name based on service_provider
