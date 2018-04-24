@@ -77,7 +77,7 @@ class mariadb::cluster::backup::mysqldump (
     options = gmcast.listen_addr=tcp://0.0.0.0:4444${wsrep_provider_options}
     sst = backup
     log = /var/log/garbd.log
-  |    END
+    | END
   # lint:endignore
 
   file { 'garbd.conf':
