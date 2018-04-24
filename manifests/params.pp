@@ -21,6 +21,7 @@ class mariadb::params {
   # wsrep patch config
   $wsrep_cluster_address = undef
   $wsrep_cluster_peers   = undef
+  $wsrep_cluster_port    = '4567'
   $wsrep_cluster_name    = undef
   $wsrep_sst_user        = 'wsrep_sst'
   $wsrep_sst_user_peers  = '%'

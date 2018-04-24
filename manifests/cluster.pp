@@ -60,6 +60,7 @@ class mariadb::cluster (
   Stdlib::Absolutepath $config_dir = $mariadb::params::config_dir,
   $wsrep_cluster_address        = $mariadb::params::wsrep_cluster_address,
   $wsrep_cluster_peers          = $mariadb::params::wsrep_cluster_peers,
+  $wsrep_cluster_port           = $mariadb::params::wsrep_cluster_port,
   $wsrep_cluster_name           = $mariadb::params::wsrep_cluster_name,
   $wsrep_sst_user               = $mariadb::params::wsrep_sst_user,
   $wsrep_sst_user_peers         = $mariadb::params::wsrep_sst_user_peers,
