@@ -25,7 +25,6 @@ Gemfile:
   required:
     ':development':
       - gem: travis
-      - gem: puppet-blacksmith
     ':puppet_lint':
       - gem: puppet-lint-absolute_classname-check
       - gem: puppet-lint-absolute_template_path
@@ -48,7 +47,3 @@ Gemfile:
       - gem: puppet-lint-unquoted_string-check
       - gem: puppet-lint-variable_contains_upcase
       - gem: puppet-lint-version_comparison-check
-
-Rakefile:
-  requires:
-    - puppet_blacksmith/rake_tasks
