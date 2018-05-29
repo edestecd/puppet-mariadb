@@ -41,11 +41,9 @@ class mariadb::cluster::galera_config {
       -> class { '::mariadb::repo::percona': }
       -> anchor { 'mariadb::cluster::galera_config::end': }
     }
-    package { ['percona-xtrabackup', 'socat']:
-      ensure => installed,
-      before => File["${mariadb::cluster::config_dir}/cluster.cnf"],
-      tag    => 'percona',
-    }
+    ensure_packages(['percona-xtrabackup', 'socat'])
+    Package['percona-xtrabackup', 'socat']
+    -> File["${mariadb::cluster::config_dir}/cluster.cnf"]
   }
 
   file { "${mariadb::cluster::config_dir}/cluster.cnf":

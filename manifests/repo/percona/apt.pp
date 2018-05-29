@@ -12,5 +12,7 @@ class mariadb::repo::percona::apt {
       'id' => '430BDF5C56E7C94E848EE60C1C4CBDCDCD2EFD2A',
     },
   }
-  Apt::Source['percona-release'] -> Class['apt::update'] -> Package<| tag == 'percona' |>
+  # lint:ignore:spaceship_operator_without_tag
+  Apt::Source['percona-release'] -> Class['apt::update'] -> Package<| |>
+  # lint:endignore
 }
