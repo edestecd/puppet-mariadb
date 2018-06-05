@@ -1,6 +1,6 @@
 {
   "name": "edestecd-mariadb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Chris Edester",
   "summary": "Puppet Module for managing MariaDB",
   "license": "GPL-3.0+",

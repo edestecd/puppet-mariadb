@@ -1,3 +1,6 @@
+2018-06-05 (1.0.1)  Brad Koby
+        * Works with mysql::backup::xtrabackup
+
 2018-04-24 (1.0.0)  Chris Edester
         * README updates
         * Create one wsrep_sst_user per peer
