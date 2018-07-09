@@ -89,6 +89,7 @@ class mariadb::cluster (
     manage_user          => $manage_user,
     manage_timezone      => $manage_timezone,
     manage_repo          => $manage_repo,
+    repo_version         => $repo_version,
     dev                  => $dev,
     cluster              => true,
     restart              => $restart,
