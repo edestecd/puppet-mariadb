@@ -1,3 +1,6 @@
+2018-07-09 (1.0.2)  Brad Koby
+        * Fix bug: Pass repo_version to mariadb::server from mariadb::cluster
+
 2018-06-05 (1.0.1)  Brad Koby
         * Works with mysql::backup::xtrabackup
 
