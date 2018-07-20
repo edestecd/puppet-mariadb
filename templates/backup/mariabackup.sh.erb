@@ -1,0 +1,48 @@
+<%- if @kernel == 'Linux' -%>
+#!/bin/bash
+<%- else -%>
+#!/bin/sh
+<%- end -%>
+#
+# A wrapper for mariabackup
+#
+<% if @prescript -%>
+  <%- [@prescript].flatten.compact.each do |script| %>
+<%= script %>
+  <%- end -%>
+<% end -%>
+
+now=$(date)
+dayofweek=$(date +%w --date="${now}")
+weekofyear=$(date +%Y-%W --date="$now")
+targetdir="/tmp/${weekofyear}/${dayofweek}"
+basedir="/tmp/${weekofyear}/$[dayofweek - 1]"
+
+if [ ! -d ${targetdir} ]; then
+  mkdir -p ${targetdir}
+fi
+
+<%- _mariabackup_args = '--backup' -%>
+<%- if @backupuser and @backuppassword -%>
+  <%- _mariabackup_args = _mariabackup_args + ' --user="' + @backupuser + '" --password="' + @backuppassword + '"' -%>
+<%- end -%>
+<%- if @backupdatabases and @backupdatabases.is_a?(Array) and !@backupdatabases.empty? -%>
+  <%- _mariabackup_args = _mariabackup_args + ' --databases="' + @backupdatabases.join(' ') + '"' -%>
+<%- end -%>
+<%- _mariabackup_args = _mariabackup_args + ' --target-dir=${targetdir}' -%>
+<%- if @optional_args and @optional_args.is_a?(Array) -%>
+  <%- @optional_args.each do |arg| -%>
+    <%- _mariabackup_args = _mariabackup_args + ' ' + arg -%>
+  <%- end -%>
+<%- end -%>
+if [ ${dayofweek} -eq 0 ] || [ ! -d ${basedir} ] ; then
+  <%= @backupmethod %> <%= _mariabackup_args %> "$@"
+else
+  <%= @backupmethod %> <%= _mariabackup_args %> --incremental-basedir=${basedir} "$@"
+fi
+
+<% if @postscript -%>
+  <%- [@postscript].flatten.compact.each do |script| %>
+<%= script %>
+  <%- end -%>
+<% end -%>

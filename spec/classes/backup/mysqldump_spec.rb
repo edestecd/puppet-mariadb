@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'mariadb::cluster::backup::mysqldump' do
+describe 'mariadb::backup::mysqldump' do
   let(:pre_condition) do
     "class { '::mariadb::cluster': wsrep_cluster_peers => ['127.0.0.1', '127.0.0.2'] }"
   end
