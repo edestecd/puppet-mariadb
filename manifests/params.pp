@@ -58,6 +58,9 @@ class mariadb::params {
 
     # cluster.pp
     $cluster_package_name = 'MariaDB-Galera-server'
+
+    # backup
+    $backup_package_name = 'MariaDB-backup'
   } elsif ($::osfamily == 'Debian') and (
     (($::operatingsystem == 'Debian') and (versioncmp($::operatingsystemrelease, '7.0') >= 0)) or
     (($::operatingsystem == 'Ubuntu') and (versioncmp($::operatingsystemrelease, '12.0') >= 0))
@@ -90,6 +93,9 @@ class mariadb::params {
 
     # cluster.pp
     $cluster_package_name = 'mariadb-galera-server'
+
+    # backup
+    $backup_package_name = 'mariadb-backup'
   } else {
     fail("The ${module_name} module is not supported on a ${::osfamily} based system with version ${::operatingsystemrelease}.")
   }
