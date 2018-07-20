@@ -46,6 +46,10 @@ class mariadb::cluster::galera_config {
     })
     Package['percona-xtrabackup', 'socat']
     -> File["${mariadb::cluster::config_dir}/cluster.cnf"]
+  } elsif $mariadb::cluster::wsrep_sst_method == 'mariabackup' {
+    ensure_packages($mariadb::cluster::backup_package_name)
+    Package[$mariadb::cluster::backup_package_name]
+    -> File["${mariadb::cluster::config_dir}/cluster.cnf"]
   }
 
   file { "${mariadb::cluster::config_dir}/cluster.cnf":
