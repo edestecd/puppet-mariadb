@@ -6,6 +6,9 @@
 #
 # A wrapper for mariabackup
 #
+
+echo "MariaDB backup initiated on <%= @facts['fqdn'] -%> at $(date)"
+
 <% if @prescript -%>
   <%- [@prescript].flatten.compact.each do |script| %>
 <%= script %>
@@ -41,8 +44,16 @@ else
   <%= @backupmethod %> <%= _mariabackup_args %> --incremental-basedir=${basedir} "$@"
 fi
 
+exitcode=$?
+
 <% if @postscript -%>
   <%- [@postscript].flatten.compact.each do |script| %>
 <%= script %>
   <%- end -%>
 <% end -%>
+
+if [ ${exitcode} != 0 ]; then
+  echo "MariaDB backup failed on <%= @facts['fqdn'] -%> at $(date)"
+else
+  echo "MariaDB backup completed on <%= @facts['fqdn'] -%> at $(date)"
+fi

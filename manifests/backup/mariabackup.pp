@@ -25,7 +25,10 @@ class mariadb::backup::mariabackup (
   $postscript              = false,
   $execpath                = '/usr/bin:/usr/sbin:/bin:/sbin',
   $optional_args           = [],
-  $additional_cron_args    = '' # lint:ignore:empty_string_assignment
+  $additional_cron_args    = '', # lint:ignore:empty_string_assignment
+  $logging_enabled         = false,
+  $log_path                = $mariadb::params::home,
+  $log_file                = 'mariabackup.log'
 ) inherits mariadb::params {
 
   ensure_packages($mariabackup_package_name)
@@ -33,6 +36,11 @@ class mariadb::backup::mariabackup (
   $initiator_ensure = $initiator_node ? {
     true    => $ensure,
     default => 'absent',
+  }
+
+  $_redirect = $logging_enabled ? {
+    true    => ">>${log_path}/${log_file} 2>&1",
+    default => undef,
   }
 
   if $backupuser and $backuppassword {
@@ -53,7 +61,7 @@ class mariadb::backup::mariabackup (
 
   cron { 'mariabackup':
     ensure  => $initiator_ensure,
-    command => "/usr/local/sbin/mariabackup.sh ${additional_cron_args}",
+    command => "/usr/local/sbin/mariabackup.sh ${additional_cron_args} ${_redirect}",
     user    => 'root',
     hour    => $time[0],
     minute  => $time[1],
