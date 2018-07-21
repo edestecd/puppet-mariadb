@@ -11,13 +11,12 @@ class mariadb::backup::mariabackup (
   $mariabackup_package_name = $mariadb::params::backup_package_name,
   $backupuser              = undef,
   $backuppassword          = undef,
-  $backupdir               = "${mariadb::params::home}/backups",
+  $backupdir               = $mariadb::params::backupdir,
   $backupmethod            = 'mariabackup',
   $backupdirmode           = '0700',
-  $backupdirowner          = $mariadb::params::user,
-  $backupdirgroup          = $mariadb::params::group,
+  $backupdirowner          = 'root',
+  $backupdirgroup          = 'root',
   $backupcompress          = true,
-  $initiator_node          = false,
   $backupdatabases         = [],
   $ensure                  = 'present',
   $time                    = ['23', '5'],
@@ -26,17 +25,13 @@ class mariadb::backup::mariabackup (
   $execpath                = '/usr/bin:/usr/sbin:/bin:/sbin',
   $optional_args           = [],
   $additional_cron_args    = '', # lint:ignore:empty_string_assignment
+  $incremental             = true,
   $logging_enabled         = false,
   $log_path                = $mariadb::params::home,
   $log_file                = 'mariabackup.log'
 ) inherits mariadb::params {
 
   ensure_packages($mariabackup_package_name)
-
-  $initiator_ensure = $initiator_node ? {
-    true    => $ensure,
-    default => 'absent',
-  }
 
   $_redirect = $logging_enabled ? {
     true    => ">>${log_path}/${log_file} 2>&1",
@@ -60,8 +55,8 @@ class mariadb::backup::mariabackup (
   }
 
   cron { 'mariabackup':
-    ensure  => $initiator_ensure,
-    command => "/usr/local/sbin/mariabackup.sh ${additional_cron_args} ${_redirect}",
+    ensure  => $ensure,
+    command => "/usr/local/sbin/mariabackup.sh ${additional_cron_args}${_redirect}",
     user    => 'root',
     hour    => $time[0],
     minute  => $time[1],
@@ -81,8 +76,8 @@ class mariadb::backup::mariabackup (
     ensure  => $ensure,
     path    => '/usr/local/sbin/mariabackup.sh',
     mode    => '0700',
-    owner   => $backupdirowner,
-    group   => $backupdirgroup,
+    owner   => 'root',
+    group   => 'root',
     content => template('mariadb/backup/mariabackup.sh.erb'),
   }
 }
