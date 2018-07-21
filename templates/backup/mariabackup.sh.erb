@@ -18,8 +18,8 @@ echo "MariaDB backup initiated on <%= @facts['fqdn'] -%> at $(date)"
 now=$(date)
 dayofweek=$(date +%w --date="${now}")
 weekofyear=$(date +%Y-%W --date="$now")
-targetdir="/tmp/${weekofyear}/${dayofweek}"
-basedir="/tmp/${weekofyear}/$[dayofweek - 1]"
+targetdir="<%= @backupdir -%>/${weekofyear}/${dayofweek}"
+basedir="<%= @backupdir -%>/${weekofyear}/$[dayofweek - 1]"
 
 if [ ! -d ${targetdir} ]; then
   mkdir -p ${targetdir}
