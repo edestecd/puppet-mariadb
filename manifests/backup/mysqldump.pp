@@ -1,12 +1,12 @@
-# mariadb::cluster::backup::mysqldump
+# mariadb::backup::mysqldump
 #
 # Manage MariaDB Galera Cluster Backup
 #
 # @summary Manage MariaDB Galera Cluster Backup
 #
 # @example
-#   include mariadb::cluster::backup::mysqldump
-class mariadb::cluster::backup::mysqldump (
+#   include mariadb::backup::mysqldump
+class mariadb::backup::mysqldump (
   $backupuser         = '', # lint:ignore:empty_string_assignment
   $backuppassword     = '', # lint:ignore:empty_string_assignment
   $backupdir          = '', # lint:ignore:empty_string_assignment

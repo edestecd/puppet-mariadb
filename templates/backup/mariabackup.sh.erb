@@ -1,0 +1,65 @@
+<%- if @kernel == 'Linux' -%>
+#!/bin/bash
+<%- else -%>
+#!/bin/sh
+<%- end -%>
+#
+# A wrapper for mariabackup
+#
+
+echo "MariaDB backup initiated on <%= @facts['fqdn'] -%> at $(date)"
+
+<% if @prescript -%>
+  <%- [@prescript].flatten.compact.each do |script| %>
+<%= script %>
+  <%- end -%>
+<% end -%>
+
+now=$(date)
+dayofweek=$(date +%w --date="${now}")
+weekofyear=$(date +%Y-%U --date="${now}")
+targetdir="<%= @backupdir -%>/${weekofyear}/${dayofweek}"
+<%- if @incremental -%>
+basedir="<%= @backupdir -%>/${weekofyear}/$[dayofweek - 1]"
+<%- end -%>
+
+if [ ! -d ${targetdir} ]; then
+  mkdir -p ${targetdir}
+fi
+
+<%- _mariabackup_args = '--backup' -%>
+<%- if @backupuser and @backuppassword -%>
+  <%- _mariabackup_args = _mariabackup_args + ' --user="' + @backupuser + '" --password="' + @backuppassword + '"' -%>
+<%- end -%>
+<%- if @backupdatabases and @backupdatabases.is_a?(Array) and !@backupdatabases.empty? -%>
+  <%- _mariabackup_args = _mariabackup_args + ' --databases="' + @backupdatabases.join(' ') + '"' -%>
+<%- end -%>
+<%- _mariabackup_args = _mariabackup_args + ' --target-dir=${targetdir}' -%>
+<%- if @optional_args and @optional_args.is_a?(Array) -%>
+  <%- @optional_args.each do |arg| -%>
+    <%- _mariabackup_args = _mariabackup_args + ' ' + arg -%>
+  <%- end -%>
+<%- end -%>
+<%- if @incremental -%>
+if [ ${dayofweek} -eq 0 ] || [ ! -d ${basedir} ] ; then
+<%- end -%>
+<%- if @incremental -%>  <% end -%><%= @backupmethod %> <%= _mariabackup_args %> "$@"
+<%- if @incremental -%>
+else
+  <%= @backupmethod %> <%= _mariabackup_args %> --incremental-basedir=${basedir} "$@"
+fi
+<%- end -%>
+
+exitcode=$?
+
+<% if @postscript -%>
+  <%- [@postscript].flatten.compact.each do |script| %>
+<%= script %>
+  <%- end -%>
+<% end -%>
+
+if [ ${exitcode} != 0 ]; then
+  echo "MariaDB backup failed on <%= @facts['fqdn'] -%> at $(date)"
+else
+  echo "MariaDB backup completed on <%= @facts['fqdn'] -%> at $(date)"
+fi

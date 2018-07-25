@@ -36,14 +36,15 @@ class mariadb::params {
     $devel_package_name  = 'MariaDB-devel'
 
     # user.pp
-    $user    = 'mysql'
-    $comment = 'MySQL server'
-    $uid     = 494
-    $gid     = 494
-    $home    = '/var/lib/mysql'
-    $shell   = '/sbin/nologin'
-    $group   = 'mysql'
-    $groups  = undef
+    $user      = 'mysql'
+    $comment   = 'MySQL server'
+    $uid       = 494
+    $gid       = 494
+    $home      = '/var/lib/mysql'
+    $backupdir = '/var/lib/mysqlbackups'
+    $shell     = '/sbin/nologin'
+    $group     = 'mysql'
+    $groups    = undef
 
     # config.pp
     $log_error      = '/var/lib/mysql/mysqld.log'
@@ -71,14 +72,15 @@ class mariadb::params {
     $devel_package_name  = 'libmariadbd-dev'
 
     # user.pp
-    $user    = 'mysql'
-    $comment = 'MySQL Server'
-    $uid     = 494
-    $gid     = 494
-    $home    = '/var/lib/mysql'
-    $shell   = '/bin/false'
-    $group   = 'mysql'
-    $groups  = undef
+    $user      = 'mysql'
+    $comment   = 'MySQL Server'
+    $uid       = 494
+    $gid       = 494
+    $home      = '/var/lib/mysql'
+    $backupdir = '/var/lib/mysqlbackups'
+    $shell     = '/bin/false'
+    $group     = 'mysql'
+    $groups    = undef
 
     # config.pp
     $log_error      = undef
