@@ -1,3 +1,8 @@
+2018-07-25 (1.1.0)  Brad Koby
+        * Support mariabackup wsrep_sst_method
+        * Add mariabackup class to do incremental/daily backups
+        * PDK 1.6.0
+
 2018-07-09 (1.0.2)  Brad Koby
         * Fix bug: Pass repo_version to mariadb::server from mariadb::cluster
 
