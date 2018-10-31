@@ -1,5 +1,10 @@
+2018-10-31 (2.0.0)  Chris Edester
+        * Use puppet 4 compatible functions - thanks Tobias Urdin
+        * requires puppetlabs/mysql 6.0.0
+
 2018-07-26 (1.1.1)  Brad Koby
         * Ensure 'socat' package is installed when using mariabackup sst method
+
 2018-07-25 (1.1.0)  Brad Koby
         * Support mariabackup wsrep_sst_method
         * Add mariabackup class to do incremental/daily backups
