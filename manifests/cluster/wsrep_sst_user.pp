@@ -12,7 +12,7 @@ define mariadb::cluster::wsrep_sst_user (
 
   mysql_user { $wsrep_sst_user:
     ensure        => present,
-    password_hash => mysql_password($wsrep_sst_password),
+    password_hash => mysql::password($wsrep_sst_password),
     tls_options   => $wsrep_sst_user_tls_options,
     require       => Class['::mysql::server::root_password'],
   }
