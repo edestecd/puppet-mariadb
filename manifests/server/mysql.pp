@@ -28,7 +28,7 @@ class mariadb::server::mysql (
   class { '::mysql::server':
     config_file             => $mariadb::server::config_file,
     includedir              => $mariadb::server::includedir,
-    override_options        => mysql::deepmerge($auth_pam_options, $options),
+    override_options        => mysql::normalise_and_deepmerge($auth_pam_options, $options),
     package_ensure          => installed,
     package_name            => $package_name,
     remove_default_accounts => true,

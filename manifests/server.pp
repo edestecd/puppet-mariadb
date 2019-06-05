@@ -42,7 +42,7 @@ class mariadb::server (
   $databases            = {},
 ) inherits mariadb::params {
 
-  $options = mysql::deepmerge($mariadb::params::server_default_options, $override_options)
+  $options = mysql::normalise_and_deepmerge($mariadb::params::server_default_options, $override_options)
 
   if $manage_repo {
     class { '::mariadb::repo':

@@ -20,7 +20,7 @@ class mariadb::client (
   $override_options    = {},
 ) inherits mariadb::params {
 
-  $options = mysql::deepmerge($mariadb::params::client_default_options, $override_options)
+  $options = mysql::normalise_and_deepmerge($mariadb::params::client_default_options, $override_options)
 
   if $manage_repo {
     class { '::mariadb::repo':
