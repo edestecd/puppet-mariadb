@@ -1,9 +1,9 @@
 # See README.md for details.
 define mariadb::db_grant (
   $user,
+  $grant,
   $dbname  = $name,
   $host    = 'localhost',
-  $grant   = 'ALL',
   $options = undef,
   Enum['present', 'absent'] $ensure = 'present',
 ) {
