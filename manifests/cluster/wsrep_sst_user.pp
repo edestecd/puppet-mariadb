@@ -21,7 +21,7 @@ define mariadb::cluster::wsrep_sst_user (
     ensure     => present,
     user       => $wsrep_sst_user,
     table      => '*.*',
-    privileges => ['ALL'],
+    privileges => ['RELOAD', 'PROCESS', 'LOCK TABLES', 'REPLICATION CLIENT'],
     options    => $wsrep_sst_user_grant_options,
   }
 }
