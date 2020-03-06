@@ -23,13 +23,13 @@ class mariadb::client (
   $options = mysql::deepmerge($mariadb::params::client_default_options, $override_options)
 
   if $manage_repo {
-    class { '::mariadb::repo':
+    class { 'mariadb::repo':
       repo_version => $repo_version,
     }
   }
 
   anchor { 'mariadb::client::start': }
-  -> class { '::mariadb::client::mysql': }
-  -> class { '::mariadb::client::config': }
+  -> class { 'mariadb::client::mysql': }
+  -> class { 'mariadb::client::config': }
   -> anchor { 'mariadb::client::end': }
 }

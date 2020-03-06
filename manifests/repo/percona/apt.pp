@@ -3,7 +3,7 @@
 #
 
 class mariadb::repo::percona::apt {
-  include ::apt
+  include apt
 
   apt::source { 'percona-release':
     location => 'http://repo.percona.com/apt',

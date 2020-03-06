@@ -85,7 +85,7 @@ class mariadb::cluster (
   $galera_options  = mysql::deepmerge($mariadb::params::galera_default_options, $galera_override_options)
 
   anchor { 'mariadb::cluster::start': }
-  -> class { '::mariadb::server':
+  -> class { 'mariadb::server':
     manage_user          => $manage_user,
     manage_timezone      => $manage_timezone,
     manage_repo          => $manage_repo,
@@ -114,7 +114,7 @@ class mariadb::cluster (
     grants               => $grants,
     databases            => $databases,
   }
-  -> class { '::mariadb::cluster::auth': }
-  -> class { '::mariadb::cluster::galera_config': }
+  -> class { 'mariadb::cluster::auth': }
+  -> class { 'mariadb::cluster::galera_config': }
   -> anchor { 'mariadb::cluster::end': }
 }

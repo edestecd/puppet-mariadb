@@ -45,26 +45,26 @@ class mariadb::server (
   $options = mysql::deepmerge($mariadb::params::server_default_options, $override_options)
 
   if $manage_repo {
-    class { '::mariadb::repo':
+    class { 'mariadb::repo':
       repo_version => $repo_version,
     }
   }
 
   if $manage_user {
     Anchor['mariadb::server::start']
-    -> class { '::mariadb::server::user': }
+    -> class { 'mariadb::server::user': }
     -> Class['mariadb::client::mysql']
   }
 
   if $manage_timezone {
     Class['mariadb::server::mysql']
-    -> class { '::mariadb::server::timezone': }
+    -> class { 'mariadb::server::timezone': }
     -> Anchor['mariadb::server::end']
   }
 
   anchor { 'mariadb::server::start': }
-  -> class { '::mariadb::client::mysql': dev => $dev }
-  -> class { '::mariadb::server::mysql': cluster => $cluster }
+  -> class { 'mariadb::client::mysql': dev => $dev }
+  -> class { 'mariadb::server::mysql': cluster => $cluster }
   -> anchor { 'mariadb::server::end': }
 
   if $::settings::storeconfigs and $storeconfigs_enabled {

@@ -6,13 +6,13 @@ class mariadb::client::mysql (
   $dev = $mariadb::client::dev,
 ){
 
-  class { '::mysql::client':
+  class { 'mysql::client':
     package_ensure => installed,
     package_name   => $mariadb::params::client_package_name,
   }
 
   if $dev {
-    class { '::mysql::bindings':
+    class { 'mysql::bindings':
       client_dev                => true,
       client_dev_package_ensure => installed,
       client_dev_package_name   => $mariadb::params::devel_package_name,
