@@ -1,3 +1,10 @@
+2020-03-06 (2.0.1)  Brad Koby
+        * Stop using absolute class names
+        * Bump puppetlabs-apt max version 
+        * Limit puppet puppetlabs-mysql max version (due to mysql::deepmerge removal)
+        * Convert PDK template to version 1.9.0
+        * Set mock_with to :rspec
+
 2018-10-31 (2.0.0)  Chris Edester
         * Use puppet 4 compatible functions - thanks Tobias Urdin
         * requires puppetlabs/mysql 6.0.0
