@@ -22,10 +22,10 @@ class mariadb::repo (
 
   case $::osfamily {
     'RedHat': {
-      include '::mariadb::repo::yum'
+      include 'mariadb::repo::yum'
     }
     'Debian': {
-      include '::mariadb::repo::apt'
+      include 'mariadb::repo::apt'
     }
     default: {
       fail("Unsupported managed repository for ${::osfamily}, currently only supports RedHat and Debian")
@@ -33,6 +33,6 @@ class mariadb::repo (
   }
 
   if $percona_repo {
-    include '::mariadb::repo::percona'
+    include 'mariadb::repo::percona'
   }
 }

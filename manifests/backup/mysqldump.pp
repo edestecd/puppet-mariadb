@@ -31,7 +31,7 @@ class mariadb::backup::mysqldump (
   $optional_args      = [],
 ) inherits mariadb::params {
 
-  include '::mariadb::cluster'
+  include 'mariadb::cluster'
 
   if $backupcompress {
     ensure_packages(['bzip2'])
