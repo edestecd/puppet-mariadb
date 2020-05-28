@@ -38,7 +38,7 @@ class mariadb::cluster::galera_config {
   if $mariadb::cluster::wsrep_sst_method in ['xtrabackup', 'xtrabackup-v2'] {
     if $mariadb::cluster::manage_repo {
       anchor { 'mariadb::cluster::galera_config::start': }
-      -> class { '::mariadb::repo::percona': }
+      -> class { 'mariadb::repo::percona': }
       -> anchor { 'mariadb::cluster::galera_config::end': }
     }
     ensure_packages(['percona-xtrabackup', 'socat'], {

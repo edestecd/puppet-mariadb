@@ -11,6 +11,8 @@
 # .rubocop.yml:
 #   include_todos: true
 
+mock_with: ':rspec'
+
 Gemfile:
   required:
     ':development':

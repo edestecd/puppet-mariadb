@@ -3,7 +3,7 @@
 #
 
 class mariadb::params {
-  include '::mysql::params'
+  include 'mysql::params'
 
   # ### init vars ####
   $manage_user     = false

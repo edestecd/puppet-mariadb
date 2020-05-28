@@ -3,7 +3,7 @@
 #
 
 class mariadb::repo::apt {
-  include ::apt
+  include apt
 
   $version = $mariadb::repo::repo_version
   $os      = $mariadb::repo::os

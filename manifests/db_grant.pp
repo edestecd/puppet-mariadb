@@ -10,7 +10,7 @@ define mariadb::db_grant (
 
   $table = "${dbname}.*"
 
-  include '::mysql::client'
+  include 'mysql::client'
 
   $grant_resource = {
     ensure     => $ensure,

@@ -25,7 +25,7 @@ class mariadb::server::mysql (
     $package_name = $mariadb::params::cluster_package_name
   }
 
-  class { '::mysql::server':
+  class { 'mysql::server':
     config_file             => $mariadb::server::config_file,
     includedir              => $mariadb::server::includedir,
     override_options        => mysql::normalise_and_deepmerge($auth_pam_options, $options),
