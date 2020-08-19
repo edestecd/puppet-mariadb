@@ -1,3 +1,4 @@
+        * Use renamed 'deepmerge' function 'normalise_and_deepmerge'
 2020-03-06 (2.0.1)  Brad Koby
         * Stop using absolute class names
         * Bump puppetlabs-apt max version 

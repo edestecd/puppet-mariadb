@@ -81,8 +81,8 @@ class mariadb::cluster (
   $databases                    = {},
 ) inherits mariadb::params {
 
-  $cluster_options = mysql::deepmerge($mariadb::params::cluster_default_options, $override_options)
-  $galera_options  = mysql::deepmerge($mariadb::params::galera_default_options, $galera_override_options)
+  $cluster_options = mysql::normalise_and_deepmerge($mariadb::params::cluster_default_options, $override_options)
+  $galera_options  = mysql::normalise_and_deepmerge($mariadb::params::galera_default_options, $galera_override_options)
 
   anchor { 'mariadb::cluster::start': }
   -> class { 'mariadb::server':
