@@ -32,7 +32,7 @@ class mariadb::cluster::galera_config {
       'wsrep_sst_method'      => $mariadb::cluster::wsrep_sst_method,
     },
   }
-  $options = mysql::deepmerge($options_from_params, $mariadb::cluster::galera_options)
+  $options = mysql::normalise_and_deepmerge($options_from_params, $mariadb::cluster::galera_options)
   $includedir = false
 
   if $mariadb::cluster::wsrep_sst_method in ['xtrabackup', 'xtrabackup-v2'] {

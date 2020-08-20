@@ -18,7 +18,7 @@
     },
     {
       "name": "puppetlabs/mysql",
-      "version_requirement": ">= 7.0.0 < 10.8.0"
+      "version_requirement": ">= 9.0.0 < 10.8.0"
     }
   ],
   "operatingsystem_support": [
