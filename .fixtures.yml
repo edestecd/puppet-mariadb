@@ -6,9 +6,7 @@ fixtures:
   forge_modules:
     apt: "puppetlabs/apt"
     stdlib: "puppetlabs/stdlib"
-    mysql:
-      repo: "puppetlabs/mysql"
-      ref: "7.0.0"
+    mysql: "puppetlabs/mysql"
     # Extracted from core in puppet 6
     cron_core: "puppetlabs/cron_core"
     yumrepo_core: "puppetlabs/yumrepo_core"
