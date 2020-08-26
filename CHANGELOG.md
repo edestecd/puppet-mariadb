@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020-08-26 (2.1.1)  Brad Koby
+* Update PDK template version
+* Increase stdlib dependency max version
+* Increase puppet max version
+
 ## 2020-08-19 (2.1.0)  Brad Koby
 * Use renamed 'deepmerge' function 'normalise_and_deepmerge'
 * requires puppetlabs/mysql 9.0.0
