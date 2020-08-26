@@ -1,6 +1,6 @@
 {
   "name": "edestecd-mariadb",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "Chris Edester",
   "summary": "Puppet Module for managing MariaDB",
   "license": "GPL-3.0+",
@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.16.0 < 5.0.0"
+      "version_requirement": ">= 4.16.0 < 7.0.0"
     },
     {
       "name": "puppetlabs/apt",
@@ -54,7 +54,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.7.0 < 6.0.0"
+      "version_requirement": ">= 4.7.0 < 7.0.0"
     }
   ],
   "tags": [
@@ -69,7 +69,7 @@
     "cluster"
   ],
   "description": "Puppet Module to install/configure MariaDB client/cluster/server",
-  "pdk-version": "1.17.0",
+  "pdk-version": "1.18.1",
   "template-url": "https://github.com/puppetlabs/pdk-templates#1.9.0",
   "template-ref": "tags/1.9.0-0-g7281db5"
 }
