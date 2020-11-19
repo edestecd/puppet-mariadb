@@ -42,6 +42,7 @@ class mariadb::cluster (
   Boolean $manage_repo          = $mariadb::params::manage_repo,
   $repo_version                 = $mariadb::params::repo_version,
   $dev                          = true,
+  $remove_default_accounts      = $mariadb::params::remove_default_accounts,
   $restart                      = false,
   $service_enabled              = true,
   $service_manage               = true,
