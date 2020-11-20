@@ -43,6 +43,6 @@ class mariadb::server::mysql (
   }
 
   anchor { 'mariadb::server::mysql::start': }
-  -> Class['::mysql::server']
+  -> Class['mysql::server']
   -> anchor { 'mariadb::server::mysql::end': }
 }

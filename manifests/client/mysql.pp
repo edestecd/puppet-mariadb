@@ -21,12 +21,12 @@ class mariadb::client::mysql (
       daemon_dev_package_name   => $mariadb::params::shared_package_name,
     }
 
-    Class['::mysql::client']
-    -> Class['::mysql::bindings']
+    Class['mysql::client']
+    -> Class['mysql::bindings']
     -> Anchor['mariadb::client::mysql::end']
   }
 
   anchor { 'mariadb::client::mysql::start': }
-  -> Class['::mysql::client']
+  -> Class['mysql::client']
   -> anchor { 'mariadb::client::mysql::end': }
 }
