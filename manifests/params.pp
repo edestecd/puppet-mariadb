@@ -6,12 +6,13 @@ class mariadb::params {
   include 'mysql::params'
 
   # ### init vars ####
-  $manage_user     = false
-  $manage_timezone = false
-  $manage_repo     = true
-  $repo_version    = '10.1'
-  $auth_pam        = true
-  $auth_pam_plugin = 'auth_pam.so'
+  $manage_user             = false
+  $manage_timezone         = false
+  $manage_repo             = true
+  $repo_version            = '10.1'
+  $auth_pam                = true
+  $auth_pam_plugin         = 'auth_pam.so'
+  $remove_default_accounts = true
 
   $service_name = $::service_provider ? {
     'systemd' => 'mariadb',
