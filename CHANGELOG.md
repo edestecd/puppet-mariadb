@@ -2,8 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Next (2.1.2)  Chris Edester
+* Update PDK template version to 1.18.1
+
 ## 2020-08-26 (2.1.1)  Brad Koby
-* Update PDK template version
 * Increase stdlib dependency max version
 * Increase puppet max version
 
