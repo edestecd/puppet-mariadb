@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## 2021-07-02 (2.1.2)  Frank Luo
+* Update mysql version requirement
+
 ## 2020-08-26 (2.1.1)  Brad Koby
 * Update PDK template version
 * Increase stdlib dependency max version

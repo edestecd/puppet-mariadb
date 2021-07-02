@@ -1,6 +1,6 @@
 {
   "name": "edestecd-mariadb",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "author": "Chris Edester",
   "summary": "Puppet Module for managing MariaDB",
   "license": "GPL-3.0+",
@@ -18,7 +18,7 @@
     },
     {
       "name": "puppetlabs/mysql",
-      "version_requirement": ">= 9.0.0 < 10.8.0"
+      "version_requirement": ">= 11.0.0 < 12.0.0"
     }
   ],
   "operatingsystem_support": [
