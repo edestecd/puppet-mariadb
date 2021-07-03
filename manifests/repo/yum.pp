@@ -15,6 +15,6 @@ class mariadb::repo::yum {
     gpgkey   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
   }
   # lint:ignore:spaceship_operator_without_tag
-  Yumrepo['mariadb'] -> Package<| |>
+  Yumrepo['mariadb'] -> Package<| name == 'mysql-server' |>
   # lint:endignore
 }
