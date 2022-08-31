@@ -5,9 +5,10 @@
 
 define mariadb::cluster::wsrep_sst_user (
   $wsrep_sst_password,
-  $wsrep_sst_user               = $name,
-  $wsrep_sst_user_tls_options   = undef,
-  $wsrep_sst_user_grant_options = undef,
+  $wsrep_sst_user                          = $name,
+  $wsrep_sst_user_tls_options              = undef,
+  $wsrep_sst_user_grant_options            = undef,
+  Array[String] $wresp_sst_user_privileges = ['ALL'],
 ) {
 
   mysql_user { $wsrep_sst_user:
@@ -21,7 +22,7 @@ define mariadb::cluster::wsrep_sst_user (
     ensure     => present,
     user       => $wsrep_sst_user,
     table      => '*.*',
-    privileges => ['ALL'],
+    privileges => $wresp_sst_user_privileges,
     options    => $wsrep_sst_user_grant_options,
   }
 }

@@ -20,15 +20,16 @@ class mariadb::params {
   }
 
   # wsrep patch config
-  $wsrep_cluster_address = undef
-  $wsrep_cluster_peers   = undef
-  $wsrep_cluster_port    = '4567'
-  $wsrep_cluster_name    = undef
-  $wsrep_sst_user        = 'wsrep_sst'
-  $wsrep_sst_user_peers  = '%'
-  $wsrep_sst_password    = 'UNSET' # lint:ignore:security_password_in_code
-  $wsrep_sst_method      = 'mysqldump'
-  $root_password         = 'UNSET' # lint:ignore:security_password_in_code
+  $wsrep_cluster_address     = undef
+  $wsrep_cluster_peers       = undef
+  $wsrep_cluster_port        = '4567'
+  $wsrep_cluster_name        = undef
+  $wsrep_sst_user            = 'wsrep_sst'
+  $wsrep_sst_user_peers      = '%'
+  $wsrep_sst_password        = 'UNSET' # lint:ignore:security_password_in_code
+  $wresp_sst_user_privileges = ['ALL']
+  $wsrep_sst_method          = 'mysqldump'
+  $root_password             = 'UNSET' # lint:ignore:security_password_in_code
 
   if ($::osfamily == 'RedHat') and (versioncmp($::operatingsystemrelease, '6.0') >= 0) {
     # client.pp

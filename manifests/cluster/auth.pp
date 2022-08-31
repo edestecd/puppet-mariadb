@@ -13,6 +13,7 @@ class mariadb::cluster::auth {
       wsrep_sst_password           => $mariadb::cluster::wsrep_sst_password,
       wsrep_sst_user_tls_options   => $mariadb::cluster::wsrep_sst_user_tls_options,
       wsrep_sst_user_grant_options => $mariadb::cluster::wsrep_sst_user_grant_options,
+      wresp_sst_user_privileges    => $mariadb::cluster::wresp_sst_user_privileges,
     }
   }
 }
