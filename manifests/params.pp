@@ -9,7 +9,7 @@ class mariadb::params {
   $manage_user             = false
   $manage_timezone         = false
   $manage_repo             = true
-  $repo_version            = '10.1'
+  $repo_version            = '10.10'
   $auth_pam                = true
   $auth_pam_plugin         = 'auth_pam.so'
   $remove_default_accounts = true
