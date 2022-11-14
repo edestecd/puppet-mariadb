@@ -14,6 +14,7 @@ class mariadb::repo (
     'Debian' => 'debian',
     'Ubuntu' => 'ubuntu',
     'Rocky'  => 'rhel',
+    'AlmaLinux'  => 'rhel',
   }
   $arch = $::architecture ? {
     'i386'   => 'x86',
