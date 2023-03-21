@@ -7,17 +7,17 @@ class mariadb::client::mysql (
 ){
 
   class { 'mysql::client':
-    package_ensure => installed,
+    package_ensure => present,
     package_name   => $mariadb::params::client_package_name,
   }
 
   if $dev {
     class { 'mysql::bindings':
       client_dev                => true,
-      client_dev_package_ensure => installed,
+      client_dev_package_ensure => present,
       client_dev_package_name   => $mariadb::params::devel_package_name,
-      daemon_dev                => $mariadb::params::shared_package_name,
-      daemon_dev_package_ensure => installed,
+      daemon_dev                => true,
+      daemon_dev_package_ensure => present,
       daemon_dev_package_name   => $mariadb::params::shared_package_name,
     }
 
