@@ -8,13 +8,14 @@ class mariadb::repo (
 ) inherits mariadb::params {
 
   $os = $::operatingsystem ? {
-    'RedHat' => 'rhel',
-    'CentOS' => 'centos',
-    'Fedora' => 'fedora',
-    'Debian' => 'debian',
-    'Ubuntu' => 'ubuntu',
-    'Rocky'  => 'rhel',
-    'AlmaLinux'  => 'rhel',
+    'RedHat'      => 'rhel',
+    'CentOS'      => 'centos',
+    'Fedora'      => 'fedora',
+    'Debian'      => 'debian',
+    'OracleLinux' => 'rhel',
+    'Ubuntu'      => 'ubuntu',
+    'Rocky'       => 'rhel',
+    'AlmaLinux'   => 'rhel',
   }
   $arch = $::architecture ? {
     'i386'   => 'x86',
