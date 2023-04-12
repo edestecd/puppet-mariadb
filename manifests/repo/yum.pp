@@ -8,11 +8,12 @@ class mariadb::repo::yum {
   $arch    = $mariadb::repo::arch
 
   yumrepo { 'mariadb':
-    baseurl  => "http://yum.mariadb.org/${version}/${os}${::operatingsystemmajrelease}-${arch}",
-    descr    => 'MariaDB',
-    enabled  => '1',
-    gpgcheck => '1',
-    gpgkey   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
+    baseurl         => "http://yum.mariadb.org/${version}/${os}${::operatingsystemmajrelease}-${arch}",
+    descr           => 'MariaDB',
+    enabled         => '1',
+    gpgcheck        => '1',
+    gpgkey          => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
+    module_hotfixes => '1'
   }
   # lint:ignore:spaceship_operator_without_tag
   Yumrepo['mariadb'] -> Package<| |>
