@@ -68,6 +68,7 @@ class mariadb::cluster (
   $wsrep_sst_password           = $mariadb::params::wsrep_sst_password,
   $wsrep_sst_user_tls_options   = undef,
   $wsrep_sst_user_grant_options = undef,
+  Array[String] $wresp_sst_user_privileges = $mariadb::params::wresp_sst_user_privileges,
   Enum['mariabackup', 'mysqldump', 'rsync', 'rsync_wan', 'xtrabackup', 'xtrabackup-v2'] $wsrep_sst_method = $mariadb::params::wsrep_sst_method, # lint:ignore:140chars
   $root_password                = $mariadb::params::root_password,
   $override_options             = {},
